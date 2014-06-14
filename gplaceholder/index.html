@@ -3,9 +3,9 @@
 <head lang="en-US">
 <meta charset="UTF-8">
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 <title>Global placeholer for cross-browsers</title>
-<script src="gplaceholder.js"></script>
+<script src="jquery-1.11.0.min.js"></script>
+<script src="gplaceholder.min.js"></script>
 <style>
 table{width:100%;}
 input,textarea{width:80%;padding:5px 5px;float:right;}
@@ -13,16 +13,19 @@ tr{width:100%}
 td{font-size:15px;font-family:arial;padding-bottom:10px;}
 tr td:first-child{width:20%;}
 tr td:last-child{width:80%;}
-form{border:1px solid #3e3e3e;width:50%;padding:10px;border-radius:5px;box-shadow:4px 4px 4px #fff;}
-body{background:#ddd;}
+form{border:1px solid #3e3e3e;width:50%;padding:30px 10px;border-radius:5px;box-shadow:4px 4px 4px #fff;}
+body{background:#EEEEEE;}
 .code {margin: 0 auto; width: 200px;}
+.center {background: none repeat scroll 0 0 #FFFFFF;border: 2px solid #339BF0;box-shadow: 0 0 10px #3E3E3E;margin: 0 auto;padding: 20px 0;width: 70%;}
+pre {background-color: #F8F8F8;border: 1px solid #DDDDDD;border-radius: 3px;font-size: 13px;line-height: 19px;    overflow: auto;padding: 6px 10px;}
+.center1{margin:0 auto;width:55%;}
 </style>
 </head>
 <body>
 <script>
 	$(document).ready(function(){
 		$('input,textarea').gplaceholder({
-			color:'red',
+			color:'#222',
 			background:'#fff'
 		});
 	$('#add').click(function(){
@@ -31,6 +34,7 @@ body{background:#ddd;}
 	});
 	});
 </script>
+<div class="center">
 <center>
 	<h1><u>Global Placehoder Demo</u></h1>
 	<p>This is a demo for Global Placeholder plugin that shows the simple use of plugin.</p>
@@ -47,14 +51,19 @@ body{background:#ddd;}
 <a href="javascript:void(0);" id="add" >Add More Element</a>
 </center>
 <center><h1><u>How to use</u></h1></center>
-
-<div class="code">
-	$('input,textarea').gplaceholder({ 	<br/>
-		color:'red',					<br/>
-		background:'#fff'				<br/>
+<div class="center1">
+<pre>
+	$('input,textarea').gplaceholder({
+		color:'red',
+		background:'#fff'
 	});
-	<h3>Apply functionality to new added element.</h3>
-	$('input,textarea').resetGP();
+</pre>
+<h3>Apply functionality to new added element.</h3>
+<pre>
+$('input,textarea').resetGP();
+</pre>
+</div>
+
 </div>
 </body>
 </html>
