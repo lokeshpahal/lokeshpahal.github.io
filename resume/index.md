@@ -48,7 +48,7 @@ Implemented custom applications for content and knowledge management. Have also 
 	<div class="col-md-9">
 		<ul>
 			<li>
-				<h4>Bachelor of Science - Computer Science</h4>
+				<h4>Bachelor of Technology - Computer Science</h4>
 				<p>2007-2011 - Maharshi Dayanand University</p>
 			</li>
 		</ul>
