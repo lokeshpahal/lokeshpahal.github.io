@@ -23,7 +23,7 @@ Implemented custom applications for content and knowledge management. Have also 
 				<ul class="list-group">
 					<li class="list-group-item active"><h4><strong>Programming</strong></h4></li>
 					<li class="list-group-item">PHP</li>
-					<li class="list-group-item">jQuery Framework</li>
+					<li class="list-group-item">jQuery</li>
 					<li class="list-group-item">JavaScript</li>
 					<li class="list-group-item">HTML & CSS</li>
 				</ul>
