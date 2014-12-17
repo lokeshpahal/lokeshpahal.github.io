@@ -10,7 +10,7 @@ permalink:        /blog/:year/:month/:day/:title
 title:            'Lokesh Pahal'
 tagline:          'Web Developer'
 description:      'All about Lokesh Pahal'
-url:              'http://localhost:4000'
+url:              'http://lokeshpahal.com'
 baseurl:          ''
 
 # Navigation
