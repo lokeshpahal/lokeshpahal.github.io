@@ -102,6 +102,11 @@ body {
 	background-position: center;
 	background-repeat: no-repeat;
 }
+.icon-resume-letter {
+	background-image: url('/assets/images/icon-resume-letter.png');
+	background-position: center;
+	background-repeat: no-repeat;
+}
 
 .icon-resume-small {
 	background-image: url('/assets/images/icon-resume-small.png');
