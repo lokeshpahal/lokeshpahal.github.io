@@ -148,6 +148,7 @@ and (min-width : 1224px) {
 @media only screen 
 and (min-width : 320px) 
 and (max-width : 768px) {
+.mob-left-margin{margin-left:15px;}
 .fix-3 {
 	width: 50% !important;
 }
@@ -163,6 +164,7 @@ and (max-width : 1224px) {
 
 @media only screen 
 and (max-width : 320px) {
+.mob-left-margin{margin-left:15px;}
 .fix-3{
 	width: 50% !important;
 }
