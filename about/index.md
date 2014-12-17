@@ -5,7 +5,7 @@ description: About Me page of Lokesh Pahal
 theme: purple
 ---
 
-I am a web focused developer mostly working using Open Source technologies. Occasionally. I am based in Gurgaon, India and work for Prodigi.io as Front-End Developer.<br/>
+I am a web focused developer mostly working using Open Source technologies. I am based in Gurgaon, India and work for Prodigi.io as Front-End Developer.<br/>
 This is my personal website and blog where I put down my thoughts, solutions to problems and learning notes.
 
 ## Stack Overflow
