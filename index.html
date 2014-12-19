@@ -1,5 +1,5 @@
 ---
-layout: master
+layout: home
 title: Home
 description: Web Developer, Gurgaon, India
 ---
@@ -7,7 +7,10 @@ description: Web Developer, Gurgaon, India
 <div class="container">
 
 	<header class="row">
-	  <div class="col-sm-6 col-md-12" style="margin-top:25px;margin-bottom:25px">
+		<div id="snow" class="col-sm-6 col-md-12">
+			<canvas id="snowcanvas" width=1560 height=420></canvas>
+		</div>
+	  <div class="col-sm-6 col-md-12 home-title" style="margin-top:25px;margin-bottom:25px;">
 	    <h1 id="pin">{{site.title}}</h1>
 	  </div>
 	</header>

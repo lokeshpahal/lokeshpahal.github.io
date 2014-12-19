@@ -23,6 +23,7 @@ Implemented custom applications for content and knowledge management. Have also 
 				<ul class="list-group">
 					<li class="list-group-item active"><h4><strong>Programming</strong></h4></li>
 					<li class="list-group-item">PHP</li>
+					<li class="list-group-item">JEKYLL</li>
 					<li class="list-group-item">jQuery</li>
 					<li class="list-group-item">JavaScript</li>
 					<li class="list-group-item">HTML & CSS</li>
@@ -34,6 +35,13 @@ Implemented custom applications for content and knowledge management. Have also 
 					<li class="list-group-item">Joomla</li>
 					<li class="list-group-item">Wordpress</li>
 					<li class="list-group-item">PhoneGap</li>
+				</ul>
+			</div>
+			<div class="col-md-6">
+				<ul class="list-group">
+					<li class="list-group-item active"><h4><strong>Learning...</strong></h4></li>
+					<li class="list-group-item">UNITY</li>
+					<li class="list-group-item">BLENDER 3D</li>
 				</ul>
 			</div>
 		</div>
