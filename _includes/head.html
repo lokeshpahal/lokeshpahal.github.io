@@ -18,7 +18,17 @@
       {{ page.title }} : {{ site.title }}
     {% endif %}
   </title>
-
+  {% if page.title == "Home" %}
+  <meta name="twitter:card" value="Lokesh Pahal - Web Developer">
+  <!-- Open Graph data -->
+  <meta property="og:title" content="Lokesh Pahal - Web Developer" />
+  <meta property="og:image" content="{{site.url}}/assets/images/me.jpg" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="{{site.url}}" />
+  <meta property="og:description" content="{{page.description}}" />
+  <!-- for Google -->
+  {% endif %}
+  
   {% if page.path contains '_posts' %}
   <!-- Twitter Card data -->
   <meta name="twitter:card" value="summary">
