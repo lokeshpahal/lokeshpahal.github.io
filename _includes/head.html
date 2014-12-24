@@ -34,12 +34,12 @@
   <meta name="twitter:card" value="summary">
   <!-- Open Graph data -->
   <meta property="og:title" content="{{page.title}}" />
+  {% if page.title == "Merry Christmas" %}
+  <meta property="og:image" content="{{site.url}}/assets/images/merry-christmas-thumb.jpeg" />
+  {% endif %}
   <meta property="og:type" content="article" />
   <meta property="og:url" content="{{page.url}}" />
   <meta property="og:description" content="{{page.description}}" />
-  {% endif %}
-  {% if page.title == "Merry Christmas" %}
-  <meta property="og:image" content="{{site.url}}/assets/images/merry-christmas-thumb.jpeg" />
   {% endif %}
 
   <!-- CSS -->
