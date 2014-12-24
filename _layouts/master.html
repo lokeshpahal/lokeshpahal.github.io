@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
   {% include head.html %}
+  {% if page.title == "Merry Christmas" %}
+  <body class="christmas">
+  {% else %}
   <body>
+  {% endif %}
       {% include mobilemenu.html %}
       {{ content }}
       
@@ -26,5 +30,11 @@
 		  ga('send', 'pageview');
 
 		</script>
+		{% if page.title == "Merry Christmas" %}
+			<script>
+				var snd = new Audio("{{site.url}}/assets/sounds/We-Wish-You-a-Merry.wav");
+				snd.play();
+			</script>
+		{% endif %}
   </body>
 </html>

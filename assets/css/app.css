@@ -11,7 +11,10 @@
 .image-center {
     margin: 0 auto;
 }
-
+img{max-width:100%}
+img[src$='#img-thumbnail'] { text-align:center;}
+body.christmas{background:url("../images/christmas-blue-snow-fall.gif");background-repeat:repeat;color:#fff;}
+body.christmas{}
 @media (min-width: 768px) {
   .sidebar {
     position: fixed;
