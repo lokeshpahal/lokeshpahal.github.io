@@ -92,21 +92,21 @@ document.getElementById('canvasTextHolder').appendChild(textCanvas);
 textCanvas.width = document.getElementById('canvasTextHolder').offsetWidth;
 textCanvas.height = document.getElementById('canvasTextHolder').offsetHeight;
 var ctx = textCanvas.getContext('2d');
-var text = "This is a text Demo";
-var font = "120px Futura, Helvetica, sans-serif";
+var text = "Happy New Year 2015";
+var font = "74px Futura, Helvetica, sans-serif";
 
 var viewPortW = window.innerWidth;
 if(viewPortW<=1024&&viewPortW>768){
-	font = "100px Futura, Helvetica, sans-serif";
+	font = "80px Futura, Helvetica, sans-serif";
 }else if(viewPortW<=768&&viewPortW>480){
-	font = "72px Futura, Helvetica, sans-serif";
+	font = "62px Futura, Helvetica, sans-serif";
 }else if(viewPortW<=480){
-	font = "35px Futura, Helvetica, sans-serif";
+	font = "45px Futura, Helvetica, sans-serif";
 }
   
 function neonLightEffect() {
   var jitter = 25; // the distance of the maximum jitter
-  var offsetX = 30;
+  var offsetX = 25;
   var offsetY = 10;
   var blur = getBlurValue(100);
   // save state

@@ -62,7 +62,7 @@ var Fireworks = (function() {
     // and now we set off
     update();
 	setInterval(function(){
-		//createFirework();
+		createFirework();
 	},1500);
   }
 
