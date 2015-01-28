@@ -40,6 +40,7 @@ Implemented custom applications for content and knowledge management. Have also 
 			<div class="col-md-6">
 				<ul class="list-group">
 					<li class="list-group-item active"><h4><strong>Learning...</strong></h4></li>
+					<li class="list-group-item">Angularjs</li>
 					<li class="list-group-item">UNITY</li>
 					<li class="list-group-item">BLENDER 3D</li>
 				</ul>
