@@ -4,6 +4,7 @@ title:  What is Angular JS
 date:   2015-01-28 10:30:00
 categories: programming angular
 tags: Programming Angular
+description: Angularjs is a genuinely new coding dialect which was at first created in 2009 by Misko Hevery and Adam Abrons who were both Google representatives around then.
 ---
 
 Angularjs is a genuinely new coding dialect which was at first created in 2009 by Misko Hevery and Adam Abrons who were both Google representatives around then. Variant 1.0 was discharged in 2012. The beginning thought demonstrated fruitful, and the undertaking is currently authoritatively upheld by Google, with a full time advancement group. 
