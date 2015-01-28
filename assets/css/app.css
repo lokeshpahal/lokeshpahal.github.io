@@ -203,3 +203,6 @@ a.orange-link:focus {
 }
 
 .icon-back{background-position:-966px -40px ; width: 48px ; height: 48px;display:inline-block;text-decoration:none}
+
+.social-buttons{position:fixed;right:0px;top:30%;}
+article{padding-right:40px!important;}
