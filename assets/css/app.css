@@ -204,10 +204,14 @@ a.orange-link:focus {
 
 .icon-back{background-position:-966px -40px ; width: 48px ; height: 48px;display:inline-block;text-decoration:none}
 
-.social-buttons{position: fixed;
-background-color: #007FFF;
-bottom: 0px;
-width: 100%;
-height: 40px;
-padding-left: 20%;
-box-sizing: border-box;}
+@media (min-width: 768px) {
+	.social-buttons{position: fixed;
+	background-color: #fff;
+	bottom: 0px;
+	width: 100%;
+	height: 40px;
+	padding-left: 236px;
+	border: 1px solid #007FFF;
+	box-sizing: border-box;
+	padding-top: 9px;}
+}
