@@ -203,9 +203,7 @@ a.orange-link:focus {
 }
 
 .icon-back{background-position:-966px -40px ; width: 48px ; height: 48px;display:inline-block;text-decoration:none}
-.social-buttons{padding-left: 0px;}
-@media (min-width: 768px) {
-	.social-buttons{position: fixed;
+.social-buttons{position: fixed;
 	background-color: #fff;
 	bottom: 0px;
 	width: 100%;
@@ -214,4 +212,6 @@ a.orange-link:focus {
 	border: 1px solid #007FFF;
 	box-sizing: border-box;
 	padding-top: 9px;}
+@media (min-width: 768px) {
+	.social-buttons{padding-left: 236px;}
 }
