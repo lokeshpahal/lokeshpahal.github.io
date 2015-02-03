@@ -203,7 +203,7 @@ a.orange-link:focus {
 }
 
 .icon-back{background-position:-966px -40px ; width: 48px ; height: 48px;display:inline-block;text-decoration:none}
-
+.social-buttons{padding-left: 0px;}
 @media (min-width: 768px) {
 	.social-buttons{position: fixed;
 	background-color: #fff;
