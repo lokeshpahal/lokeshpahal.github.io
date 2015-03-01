@@ -1,0 +1,63 @@
+# Information which cannot be captured automatically (yet)
+- github_id: aslakknutsen
+  role: Project Lead, Cofounder
+- github_id: mojavelinux
+  role: Strategic Advisor
+- github_id: alrubinger
+  role: ShrinkWrap Founder
+- github_id: kpiwko
+  role: Drone & ShrinkWrap Lead
+  twitter_username: karelpiwko
+- github_id: graphitefriction
+  role: Content Strategist
+  jboss_username: graphitefriction
+- github_id: lordofthejars
+  role: Tech Evangelist
+  twitter_username: alexsotob
+- github_id: pmuir
+  role: Cofounder
+- github_id: tdiesler
+  role: OSGi Container Lead
+- github_id: vineetreynolds
+  role: WLS Container Lead
+- github_id: bartoszmajsak
+  role: Community Manager, Persistence & Spock Lead
+- github_id: lfryc
+  role: Warp & Graphene Lead
+  jboss_username: lfryc
+  twitter_username: lfryc
+# Cannot resolve full names for the following accounts
+- github_id: jaikiran
+  name: Jaikiran Pai
+- github_id: magnussmith
+  name: Magnus Smith
+# JBoss Community account mappings
+- github_id: tommysdk
+  jboss_username: tommysdk
+- github_id: myfear
+  jboss_username: myfear
+- github_id: kenfinnigan
+  jboss_username: kenfinni
+# Manual additions (no commits)
+- github_id: ebadr
+  jboss_username: badr
+  commits: 1
+- github_id: csierra
+  jboss_username: carlossierra
+- github_id: csadilek
+  jboss_username: csa
+- github_id: glipecki
+  name: Grzegorz Lipecki
+- github_id: maneo
+  name: Adam Dudczak
+- github_id: tolis-e
+  name: Tolis Emmanouilidis
+- github_id: w0mbat
+  name: Daniel Sachse
+- github_id: dblevins
+  jboss_username: dblevins
+- github_id: ehsavoie
+  name: Emmanuel Hugonnet
+  jboss_username: ehugonnet
+- github_id: ivannov
+  jboss_username: ivan_stefanov
