@@ -371,7 +371,7 @@ window.initialize = function() {
 
     var image = path + 'img/marker.png';
     var marker = new google.maps.Marker({
-        position: new google.maps.LatLng(51.272223,22.500727),
+        position: new google.maps.LatLng(28.45827842961848,77.02758407802321),
         animation: google.maps.Animation.DROP,
         icon: image
 
