@@ -1,145 +1,35 @@
 ---
-layout: home
+layout: default
 title: Home
-description: Web Developer, Gurgaon, India
 ---
 
-<div class="container">
-
-	<header class="row">
-		<!-- <div id="snow" class="col-sm-6 col-md-12">
-			<canvas id="snowcanvas" width=1560 height=420></canvas>
-		</div> -->
-	  <div class="col-sm-6 col-md-12 home-title" style="margin-top:25px;margin-bottom:25px;">
-	    <h1 id="pin">{{site.title}}</h1>
-	  </div>
-	</header>
-	<nav>
-		<div class="row" style="margin-top:25px">
- 			<div class="col-md-4 col-sm-6 col-xs-12">
-				<a href="about/">
-					<div class="tile purple profile bord">
-						<h2 class="title">About Me</h2>
-						<p>Hello World, I am {{site.author}}.</p>
-					</div>
-				</a>
-		    </div>
-			<div class="col-md-2 col-sm-3 col-xs-6">
-				<div class="live-tile" data-mode="flip" data-delay="3000">
-					<div>
-						<a href="resume/" title="Resume" class="tile red bord icon-resume"></a>
-					</div>
-					<div>
-						<a href="resume/" title="Resume" class="tile red bord icon-resume-letter font-fix"></a>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-2 col-sm-3 col-xs-6">
-				<div class="live-tile" data-mode="flip" data-delay="4000">
-					<div>
-						<a href="blog/" title="Blog" class="tile orange bord icon-blog"></a>
-					</div>
-					<div>
-						<a href="blog/" title="Blog" class="tile orange bord font-fix">
-						<p>Blog Section:</p>
-							<ol>
-								<li>Posts</li>
-								<li>News</li>
-							</ol>
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-4 col-sm-6 col-xs-12">
-				{% for post in site.posts limit:1 %}
-				<a href="{{post.url}}">
-					<div class="tile red bord">
-						<h3 class="title">Latest Article</h3>
-						<h4 class="title">{{ post.title }}</h4>
-						<p> {{ post.content | strip_html | truncatewords: 10 }}</p>
-					</div>
-				</a>
-				{% endfor %}
-			</div>
-			
-			<div class="col-md-4 col-sm-6 col-xs-12">
-				{% for post in site.posts offset:1 limit:1 %}
-				<a href="{{post.url}}">
-					<div class="tile green bord">
-						<h3 class="title">Recent Article</h3>
-						<h4 class="title">{{ post.title }}</h4>
-						<p> {{ post.content | strip_html | truncatewords: 10 }}</p>
-					</div>
-				</a>
-				{% endfor %}
-			</div>
-
-			<div class="col-md-4 col-sm-6 col-xs-12">
-				{% for post in site.posts %}
-					{% if post.featured == true %}
-					<a href="{{post.url}}">
-						<div class="tile orange bord">
-							<h3 class="title">Featured Article</h3>
-							<h4 class="title">{{ post.title }}</h4>
-							<p> {{ post.content | strip_html | truncatewords: 10 }}</p>
-						</div>
-					</a>
-					{% break %}
-					{% endif %}
-				{% endfor %}
-			</div>
-		</div>
-
-		<div class="row" style="margin-bottom:25px">
-			<div data-delay="2000" data-mode="flip" class="live-tile flip ha fix-3">
-			<div class="col-md-2 col-sm-3 col-xs-6 flip-front ha" style="transform: rotateX(180deg); transition: all 500ms ease 0s;">
-				<a class="tile blue bord lk-ico" href="{{site.linkedin}}"></a>
-			</div>
-
-			<div class="col-md-2 col-sm-3 col-xs-6 flip-back ha" style="transform: rotateX(360deg); transition: all 500ms ease 0s;">
-				<a class="tile blue bord tw-ico" href="{{site.twitter}}"></a>
-			</div>
-		</div>
-			<!-- 
-			<div class="col-md-2 col-sm-3 col-xs-6">
-				<a href="{{site.twitter}}"  class="tile blue bord tw-ico"></a>
-			</div> -->
-
-			<div class="col-md-2 col-sm-3 col-xs-6">
-				<a href="{{site.facebook}}" class="tile blue bord fk-ico"></a>
-			</div>
-
-			<div class="col-md-2 col-sm-3 col-xs-6">
-				<a href="feed.xml/" class="tile purple bord rs-ico"></a>
-			</div>
-
-			<div class="col-md-2 col-sm-3 col-xs-6">
-				<a href="{{site.gplus}}" class="tile orange bord gl-ico"></a>
-			</div>
-
-			<!-- Mini tile 
-			<div class="col-md-2 col-sm-3 col-xs-6 rside"> -->
-			<div class="col-md-2 col-sm-3 col-xs-6 mob-left-margin">
-				<div class="row">
-					<div style="padding-left:0px" class="col-md-6 col-sm-6 col-xs-6">
-					    <a href="{{site.linkedin}}" class="mtile blue bord lk-ico-sm"></a>
-					</div>
-					<div style="padding-left:0px" class="col-md-6 col-sm-6 col-xs-6">
-						<a href="{{site.twitter}}"  class="mtile blue bord tw-ico-sm"></a>
-					</div>
-				</div>
-				<div class="row">
-					<div  class="col-md-6 col-sm-6 col-xs-6 rep-1">
-						<a href="{{site.facebook}}" class="mtile purple bord fk-ico-sm"></a>
-					</div>
-					<div  class="col-md-6 col-sm-6 col-xs-6 rep-2">
-						<a href="{{site.gplus}}" class="mtile orange bord gl-ico-sm"></a>
-					</div>
-				</div>
-			</div> <!-- End of Mini tile -->
-		</div>
-	</nav>
+<div class="container home-page">
+    <span class="tags top-tags"> &nbsp;&nbsp;&nbsp;&lt;body&gt;</span>
+    <div class="text-zone">
+        <h1>
+            Hi,<br>
+            I’m {<img src="{{site.base_url}}/img/jj.png" alt="Wordpress Developer Name, Web Developer Name">OKESH},<br>web developer.
+        </h1>
+        <h2>Front End Developer / Web Developer / WordPress / Django</h2>
+        <a rel="contact" href="{{site.base_url}}/contact/" class="flat-button">CONTACT ME</a>
+    </div>
+    <span class="tags bottom-tags">
+        &nbsp;&nbsp;&nbsp;&lt;/body&gt;<br>
+        &lt;/html&gt;
+    </span>
+    <div id="bulb" class="bulb"><a class="animated" href=""></a></div>
 </div>
+<!-- 
+<div class="bg">
+    <img class="l1" src="{{site.base_url}}/img/l1.png" alt="Wordpress  Logo part1, Web Developer  part1">
+    <img class="l2" src="{{site.base_url}}/img/l2.png" alt="Wordpress Developer Logo part2, Web  Logo part2">
+    <img class="l3" src="{{site.base_url}}/img/l3.png" alt="Wordpress Logo part3, Web  Logo part3">
+    <img class="l4" src="{{site.base_url}}/img/l4.png" alt="Wordpress  Logo part4, Web Developer Logo part4">
+    <img class="l5" src="{{site.base_url}}/img/l5.png" alt=" Developer Logo part5,  Developer Logo part5">
+    <img class="l6" src="{{site.base_url}}/img/l6.png" alt=" Developer Logo part6, Web Developer  part6">
+    <img class="s1" src="{{site.base_url}}/img/s1.png" alt="Wordpress  Logo part7, Web  Logo ">
+    <img class="s2" src="{{site.base_url}}/img/s2.png" alt="Wordpress Developer Logo part8,  Developer Logo part8">
+    <img class="jb" src="{{site.base_url}}/img/jblue.png" alt="Wordpress,  Developer Logo part9">
+    <img class="jr" src="{{site.base_url}}/img/jred.png" alt="Wordpress , Web Developer Logo ">
+</div>
+-->

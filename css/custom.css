@@ -1,0 +1,8 @@
+#page .blog-container{overflow-x: auto}
+#page .blog-container pre{color:#fff;}
+#page .blog-container span,#page .blog-container h4,#page .blog-container h3,#page .blog-container h1,#page .blog-container a{color:#fff !important;}
+#page .blog-container .post-loop{border-bottom: 1px dotted #fff;padding-bottom: 15px;margin-bottom: 25px;}
+#page .blog-container .post-loop h1{color:#fff !important;font-size:25px !important;}
+#page .blog-container .post-loop h1 span{color:#fff;}
+#page .blog-container .post-loop h1:before{  margin-top: -22px;}
+#page .blog-container .post-loop p{color:#fff !important;}
