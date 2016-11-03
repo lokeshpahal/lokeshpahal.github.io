@@ -5,6 +5,8 @@
 	<title>{{ page.title }}</title>
 	{% if page.description %}
 	<meta name="description" content="{{ page.description }}">
+	{% else %}
+	<meta name="description" content="{{ site.description }}">
 	{% endif %}
 	<meta name="author" content="{{ site.author.name }}">
 
@@ -67,7 +69,9 @@
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="{{ site.BASE_PATH }}/">Home</a></li>
+				<li class="active"><a href="{{ site.BASE_PATH }}/">Blog</a></li>
+				<li><a href="{{ site.BASE_PATH }}/about"><i class="fa fa-user-circle-o"></i>About</a></li>
+				<li><a href="{{ site.BASE_PATH }}/resume"><i class="fa fa-microchip"></i>Skills</a></li>
 				<li><a href="{{ site.BASE_PATH}}/{{ site.categories_path }}">Categories</a></li>
 				<li><a href="{{ site.BASE_PATH}}/{{ site.tags_path }}">Tags</a></li>
 			</ul>
@@ -80,7 +84,9 @@
 			<i class="fa fa-bars"></i>
 		</button>
 		<ul class="dropdown-menu" role="menu">
-			<li><a href="{{ site.BASE_PATH}}/"><i class="fa fa-home"></i>Home</a></li>
+			<li><a href="{{ site.BASE_PATH}}/"><i class="fa fa-home"></i>Blog</a></li>
+			<li><a href="{{ site.BASE_PATH }}/about"><i class="fa fa-user-circle-o"></i>About</a></li>
+			<li><a href="{{ site.BASE_PATH }}/resume"><i class="fa fa-microchip"></i>Skills</a></li>
 			<li><a href="{{ site.BASE_PATH}}/{{ site.categories_path }}"><i class="fa fa-folder"></i>Categories</a></li>
 			<li><a href="{{ site.BASE_PATH}}/{{ site.tags_path }}"><i class="fa fa-tags"></i>Tags</a></li>
 			<li class="divider"></li>

@@ -3,11 +3,11 @@
 paginate: 10 # pagination based on number of posts
 paginate_path: "page:num"
 exclude: ["README.md"] # files to exclude
-highlighter: pygments
+highlighter: rouge
 markdown: kramdown
-disqus: dbyll
+disqus: lokeshpahal
 google_analytics: dbyll
-title: dbyll
+title: lokeshpahal
 
 defaults:
   -
@@ -16,15 +16,16 @@ defaults:
     values:
       title: dbyll
 
-description: Stylish Jekyll Theme
+description: >
+  Front End Developer / Web Developer. Since 4 years I am fascinated with front-end technologies,
+  magic and possibilities of HTML5 / CSS3 / JavaScript and Wordpress And also Plays with PHP and Python
 author:
-  name: dbyll
-  email: dbyll@ismaildemirbilek.com
-  github: dbtek
-  twitter: dbtek
-  pinterest: asd123
-  linkedin: asd123
-  bio: Your stylish, minimalist theme!
+  name: lokeshpahal
+  email: lokeshpaal2000@gmail.com
+  github: lokeshpahal
+  twitter: lokeshpahal
+  linkedin: lokesh-kumar-75223036
+  bio: Front End Developer / Web Developer.
   email_md5: 726351295ec82e145928582f595aa3aa
 
 rss_path: feed.xml
