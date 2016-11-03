@@ -1,32 +1,8 @@
 ---
 layout: default
 ---
-<div class="container about blog-container">
-    <div class="text-zone" style="width:90%">
-        <header class="post-header">
-            <h1 class="post-title">{{ page.title }}</h1>
-            <p class="post-meta">{{ page.date | date: "%b %-d, %Y" }}{% if page.author %} • {{ page.author }}{% endif %}{% if page.meta %} • {{ page.meta }}{% endif %}</p>
-        </header>
+{% include post.html %}
 
-        <article class="post-content">
-            {{ content }}
-
-            <br/><br/>
-            <h4>Comments:</h4>
-            <div id="disqus_thread"></div>
-            <script type="text/javascript">
-                /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-                var disqus_shortname = '{{site.disqushandler}}';
-
-                /* * * DON'T EDIT BELOW THIS LINE * * */
-                (function() {
-                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                })();
-            </script>
-            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-        </article>
-
-    </div>
-</div>
+{% if site.disqus and page.comments %}
+    {% include disqus.html %}
+{% endif %}
