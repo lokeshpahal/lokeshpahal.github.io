@@ -6,7 +6,7 @@ exclude: ["README.md"] # files to exclude
 highlighter: rouge
 markdown: kramdown
 disqus: lokeshpahal
-google_analytics: dbyll
+google_analytics: UA-57759089-1
 title: lokeshpahal
 
 defaults:
@@ -14,7 +14,7 @@ defaults:
     scope:
       path: "" # empty string for all files
     values:
-      title: dbyll
+      title: lokeshpahal
 
 description: >
   Front End Developer / Web Developer. Since 4 years I am fascinated with front-end technologies,
