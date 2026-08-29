@@ -1,0 +1,321 @@
+---
+import Icon from './Icon.astro';
+import { profile, socials, stats } from '../data/profile';
+---
+<section class="hero" id="top">
+  <div class="shell grid">
+    <div class="col">
+      <div class="term" role="presentation">
+        <div class="term-bar">
+          <span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span>
+          <span class="term-title mono">bash — {profile.name.toLowerCase().replace(' ', '')}</span>
+        </div>
+        <div class="term-body mono">
+          <p class="line"><span class="ps1">$</span> whoami</p>
+          <p class="out name-out">{profile.name}</p>
+          <p class="line"><span class="ps1">$</span> cat role.txt</p>
+          <p class="out"><span class="hl">{profile.role}</span></p>
+          <p class="line"><span class="ps1">$</span> echo $LOCATION</p>
+          <p class="out dim">{profile.location}</p>
+          <p class="line"><span class="ps1">$</span> <span class="cursor" aria-hidden="true"></span></p>
+        </div>
+      </div>
+
+      <h1 class="tagline">{profile.tagline}</h1>
+
+      <div class="cta">
+        <a class="btn primary" href="#work">
+          See the work <Icon name="arrow" size={16} />
+        </a>
+        <a class="btn" href={`mailto:${profile.email}`}>
+          Get in touch
+        </a>
+        {profile.resumeUrl && (
+          <a class="btn" href={profile.resumeUrl}>
+            Résumé <Icon name="external" size={14} />
+          </a>
+        )}
+      </div>
+
+      <ul class="socials">
+        {socials.map((s) => (
+          <li>
+            <a href={s.url} rel="me noopener" target="_blank" aria-label={s.label} title={`${s.label} — ${s.handle}`}>
+              <Icon name={s.icon} size={17} />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="col portrait-col">
+      <div class="portrait">
+        <img src={profile.avatar} alt={profile.name} width="320" height="320" loading="eager" />
+        <span class="corner tl"></span><span class="corner tr"></span>
+        <span class="corner bl"></span><span class="corner br"></span>
+      </div>
+      <p class="status mono">
+        <span class="pulse" aria-hidden="true"></span> available for work
+      </p>
+    </div>
+  </div>
+
+  <div class="shell">
+    <ul class="stats">
+      {stats.map((s) => (
+        <li>
+          <span class="stat-v mono">{s.value}</span>
+          <span class="stat-l">{s.label}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-block: clamp(3rem, 8vw, 5.5rem) clamp(3rem, 7vw, 4.5rem);
+    position: relative;
+  }
+
+  /* soft accent bloom behind the hero */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: -20% 0 auto;
+    height: 60%;
+    background: radial-gradient(60% 100% at 30% 0%, var(--accent-glow), transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+
+  /* ---------- terminal ---------- */
+
+  .term {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .term-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.6rem 0.85rem;
+    background: var(--surface-hi);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .d1 { background: #ff5f57; } .d2 { background: #febc2e; } .d3 { background: #28c840; }
+
+  .term-title {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 3rem;
+    font-size: 0.72rem;
+    color: var(--text-faint);
+    letter-spacing: 0.02em;
+  }
+
+  .term-body {
+    padding: 1.1rem 1.25rem 1.25rem;
+    font-size: 0.86rem;
+    line-height: 1.85;
+  }
+
+  .ps1 { color: var(--accent); margin-right: 0.55rem; font-weight: 600; }
+  .line { color: var(--text-dim); }
+  .out { color: var(--text); padding-left: 1.15rem; }
+  .out.dim { color: var(--text-dim); }
+
+  .name-out {
+    font-size: clamp(1.5rem, 4.2vw, 2.15rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.3;
+  }
+
+  .hl { color: var(--accent-2); }
+
+  .cursor {
+    display: inline-block;
+    width: 0.6em;
+    height: 1.05em;
+    background: var(--accent);
+    translate: 0 0.16em;
+    animation: blink 1.15s steps(1, end) infinite;
+  }
+
+  @keyframes blink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
+
+  /* ---------- tagline + cta ---------- */
+
+  .tagline {
+    margin-top: 2rem;
+    font-size: clamp(1.3rem, 3vw, 1.7rem);
+    font-weight: 600;
+    max-width: 34ch;
+    color: var(--text);
+  }
+
+  .cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-top: 1.75rem;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.62rem 1.1rem;
+    border: 1px solid var(--border-hi);
+    border-radius: var(--radius);
+    background: var(--surface);
+    font-family: var(--mono);
+    font-size: 0.84rem;
+    font-weight: 500;
+    transition: border-color 0.18s, background-color 0.18s, color 0.18s, translate 0.18s;
+  }
+
+  .btn:hover { translate: 0 -2px; border-color: var(--accent); color: var(--accent); }
+
+  .btn.primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--bg);
+    font-weight: 600;
+  }
+
+  .btn.primary:hover { background: var(--accent-dim); border-color: var(--accent-dim); color: var(--bg); }
+
+  .socials {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .socials a {
+    display: grid;
+    place-items: center;
+    width: 2.3rem;
+    height: 2.3rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text-dim);
+    transition: color 0.18s, border-color 0.18s, translate 0.18s;
+  }
+
+  .socials a:hover { color: var(--accent); border-color: var(--accent); translate: 0 -2px; }
+
+  /* ---------- portrait ---------- */
+
+  .portrait-col { display: grid; justify-items: center; gap: 1rem; }
+
+  .portrait {
+    position: relative;
+    width: min(280px, 68vw);
+    aspect-ratio: 1;
+    padding: 10px;
+  }
+
+  .portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius);
+    filter: grayscale(1) contrast(1.06);
+    transition: filter 0.4s ease;
+  }
+
+  .portrait:hover img { filter: grayscale(0) contrast(1); }
+
+  .corner {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid var(--accent);
+  }
+  .tl { top: 0; left: 0; border-right: 0; border-bottom: 0; }
+  .tr { top: 0; right: 0; border-left: 0; border-bottom: 0; }
+  .bl { bottom: 0; left: 0; border-right: 0; border-top: 0; }
+  .br { bottom: 0; right: 0; border-left: 0; border-top: 0; }
+
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.76rem;
+    color: var(--text-dim);
+    letter-spacing: 0.02em;
+  }
+
+  .pulse {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 0 var(--accent-glow);
+    animation: pulse 2.4s ease-out infinite;
+  }
+
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 var(--accent-glow); }
+    70%  { box-shadow: 0 0 0 9px transparent; }
+    100% { box-shadow: 0 0 0 0 transparent; }
+  }
+
+  /* ---------- stats ---------- */
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1px;
+    margin-top: clamp(2.5rem, 6vw, 4rem);
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .stats li {
+    display: grid;
+    gap: 0.25rem;
+    padding: 1.25rem 1.4rem;
+    background: var(--surface);
+  }
+
+  .stat-v {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+  }
+
+  .stat-l { font-size: 0.82rem; color: var(--text-dim); }
+
+  @media (max-width: 860px) {
+    .grid { grid-template-columns: 1fr; }
+    /* Photo leads, but stays small enough that the name is still above the
+       fold on a phone. */
+    .portrait-col {
+      order: -1;
+      grid-template-columns: auto 1fr;
+      justify-items: start;
+      align-items: center;
+      gap: 1rem;
+    }
+    .portrait { width: min(150px, 34vw); }
+  }
+</style>

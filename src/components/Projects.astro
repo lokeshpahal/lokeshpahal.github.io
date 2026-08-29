@@ -1,0 +1,133 @@
+---
+import SectionHead from './SectionHead.astro';
+import Icon from './Icon.astro';
+import { projects } from '../data/profile';
+---
+<section class="section" id="work">
+  <div class="shell">
+    <SectionHead marker="04 //" title="Selected work" />
+
+    <div class="grid">
+      {projects.map((p, i) => (
+        <article class="card reveal" style={`--i:${i}`}>
+          <header class="head">
+            <h3 class="name">{p.name}</h3>
+            {p.year && <span class="year mono">{p.year}</span>}
+          </header>
+
+          <p class="blurb">{p.blurb}</p>
+
+          <ul class="tags mono">
+            {p.tags.map((t) => <li>{t}</li>)}
+          </ul>
+
+          <footer class="links mono">
+            {p.url && (
+              <a href={p.url} target="_blank" rel="noopener">
+                live <Icon name="external" size={13} />
+              </a>
+            )}
+            {p.repo && (
+              <a href={p.repo} target="_blank" rel="noopener">
+                <Icon name="github" size={14} /> source
+              </a>
+            )}
+          </footer>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+
+  html.js .card { transition-delay: calc(var(--i) * 60ms); }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    padding: 1.4rem 1.5rem;
+    overflow: hidden;
+    transition: border-color 0.22s, translate 0.22s, background-color 0.22s;
+  }
+
+  /* accent hairline that draws in on hover */
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto auto 0;
+    height: 2px;
+    width: 100%;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    scale: 0 1;
+    transform-origin: left;
+    transition: scale 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .card:hover {
+    border-color: var(--border-hi);
+    background: var(--surface-hi);
+    translate: 0 -3px;
+  }
+
+  .card:hover::before { scale: 1 1; }
+
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .name { font-size: 1.05rem; font-weight: 650; }
+  .year { font-size: 0.76rem; color: var(--text-faint); flex: none; }
+
+  .blurb {
+    color: var(--text-dim);
+    font-size: 0.93rem;
+    line-height: 1.7;
+    flex: 1;
+  }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 1.1rem; }
+
+  .tags li {
+    padding: 0.18rem 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    background: var(--bg);
+    font-size: 0.72rem;
+    color: var(--text-faint);
+  }
+
+  .links {
+    display: flex;
+    gap: 1.1rem;
+    margin-top: 1.2rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.8rem;
+  }
+
+  .links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--text-dim);
+    transition: color 0.18s;
+  }
+
+  .links a:hover { color: var(--accent); }
+
+  .links:empty { display: none; }
+</style>

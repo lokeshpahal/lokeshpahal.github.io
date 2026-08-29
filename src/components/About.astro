@@ -1,0 +1,115 @@
+---
+import SectionHead from './SectionHead.astro';
+import Icon from './Icon.astro';
+import { about, education, profile } from '../data/profile';
+---
+<section class="section" id="about">
+  <div class="shell">
+    <SectionHead marker="01 //" title="About" />
+
+    <div class="cols">
+      <div class="prose reveal">
+        {about.map((p) => <p>{p}</p>)}
+      </div>
+
+      <aside class="side reveal">
+        <dl class="facts mono">
+          <div>
+            <dt>base</dt>
+            <dd><Icon name="location" size={14} /> {profile.location}</dd>
+          </div>
+          <div>
+            <dt>email</dt>
+            <dd><a href={`mailto:${profile.email}`}>{profile.email}</a></dd>
+          </div>
+        </dl>
+
+        {education.length > 0 && (
+          <div class="edu">
+            <h3 class="mono edu-title">education</h3>
+            <ul>
+              {education.map((e) => (
+                <li>
+                  <p class="school">{e.school}</p>
+                  <p class="cred">{e.credential}</p>
+                  <p class="years mono">{e.years}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </aside>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cols {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 3.5rem);
+    align-items: start;
+  }
+
+  .prose { max-width: var(--measure); }
+
+  .prose p {
+    color: var(--text-dim);
+    font-size: 1.02rem;
+    line-height: 1.8;
+  }
+
+  .prose p + p { margin-top: 1.15rem; }
+
+  .side {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    padding: 1.4rem;
+  }
+
+  .facts { display: grid; gap: 1rem; font-size: 0.84rem; }
+
+  .facts dt {
+    color: var(--accent);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 0.2rem;
+  }
+
+  .facts dd {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--text-dim);
+    word-break: break-word;
+  }
+
+  .facts a { transition: color 0.18s; }
+  .facts a:hover { color: var(--accent); }
+
+  .edu {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .edu-title {
+    color: var(--accent);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 0.7rem;
+  }
+
+  .edu li + li { margin-top: 1rem; }
+  .school { font-weight: 600; font-size: 0.92rem; }
+  .cred { color: var(--text-dim); font-size: 0.88rem; }
+  .years { color: var(--text-faint); font-size: 0.76rem; margin-top: 0.15rem; }
+
+  @media (max-width: 820px) {
+    .cols { grid-template-columns: 1fr; }
+  }
+</style>

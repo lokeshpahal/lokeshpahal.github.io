@@ -1,0 +1,76 @@
+---
+import SectionHead from './SectionHead.astro';
+import { skills } from '../data/profile';
+---
+<section class="section" id="skills">
+  <div class="shell">
+    <SectionHead marker="03 //" title="Toolkit" />
+
+    <div class="groups">
+      {skills.map((g, i) => (
+        <div class="group reveal" style={`--i:${i}`}>
+          <h3 class="mono title">
+            <span class="dot" aria-hidden="true"></span>{g.title}
+          </h3>
+          <ul class="items mono">
+            {g.items.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .groups {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+
+  html.js .group { transition-delay: calc(var(--i) * 60ms); }
+
+  .group {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    padding: 1.25rem 1.35rem 1.4rem;
+    transition: border-color 0.22s, background-color 0.22s;
+  }
+
+  .group:hover { border-color: var(--border-hi); background: var(--surface-hi); }
+
+  .title {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-size: 0.74rem;
+    font-weight: 500;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 1rem;
+  }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex: none;
+  }
+
+  .items { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+  .items li {
+    padding: 0.3rem 0.65rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--bg);
+    font-size: 0.79rem;
+    color: var(--text-dim);
+    transition: color 0.18s, border-color 0.18s;
+  }
+
+  .items li:hover { color: var(--accent); border-color: var(--accent); }
+</style>

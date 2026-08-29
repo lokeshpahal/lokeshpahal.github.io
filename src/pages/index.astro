@@ -1,0 +1,101 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Experience from '../components/Experience.astro';
+import Skills from '../components/Skills.astro';
+import Projects from '../components/Projects.astro';
+import Contact from '../components/Contact.astro';
+import { profile, socials, experience } from '../data/profile';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: profile.name,
+  jobTitle: profile.role,
+  description: profile.metaDescription,
+  url: 'https://lokeshpahal.com',
+  image: new URL(profile.avatar, Astro.site).href,
+  email: `mailto:${profile.email}`,
+  address: { '@type': 'PostalAddress', addressLocality: 'Gurgaon', addressRegion: 'Haryana', addressCountry: 'IN' },
+  sameAs: socials.filter((s) => s.icon !== 'mail').map((s) => s.url),
+  worksFor: { '@type': 'Organization', name: experience[0]?.company ?? '' },
+};
+---
+<Base>
+  <Header />
+  <main id="main">
+    <Hero />
+    <About />
+    <Experience />
+    <Skills />
+    <Projects />
+    <Contact />
+  </main>
+
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <script>
+    // Theme toggle — the initial value is set inline in <head> to avoid a flash.
+    const toggle = document.getElementById('theme-toggle');
+    toggle?.addEventListener('click', () => {
+      const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+      document.documentElement.dataset.theme = next;
+      try { localStorage.setItem('theme', next); } catch {}
+    });
+
+    // Reveal sections as they enter the viewport.
+    const revealables = document.querySelectorAll<HTMLElement>('.reveal');
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (!entry.isIntersecting) continue;
+            entry.target.classList.add('in');
+            io.unobserve(entry.target);
+          }
+        },
+        { rootMargin: '0px 0px -12% 0px', threshold: 0.05 },
+      );
+      revealables.forEach((el) => io.observe(el));
+    } else {
+      revealables.forEach((el) => el.classList.add('in'));
+    }
+
+    // Highlight the nav link for whichever section is on screen.
+    const navLinks = new Map<string, HTMLAnchorElement>();
+    document.querySelectorAll<HTMLAnchorElement>('[data-nav]').forEach((a) => {
+      navLinks.set(a.dataset.nav!.slice(1), a);
+    });
+
+    const sections = [...navLinks.keys()]
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+
+    if ('IntersectionObserver' in window && sections.length) {
+      const visible = new Set<string>();
+      const spy = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) visible.add(entry.target.id);
+            else visible.delete(entry.target.id);
+          }
+          // When two sections straddle the band, the lower one is the one
+          // being scrolled into — so the last match wins, not the first.
+          let current: string | undefined;
+          for (const s of sections) if (visible.has(s.id)) current = s.id;
+          navLinks.forEach((a, id) => a.classList.toggle('active', id === current));
+        },
+        { rootMargin: '-20% 0px -60% 0px' },
+      );
+      sections.forEach((s) => spy.observe(s));
+    }
+
+    // Give the sticky header a border once the page has scrolled.
+    const bar = document.querySelector('.bar');
+    const onScroll = () => bar?.classList.toggle('stuck', window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  </script>
+</Base>

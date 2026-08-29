@@ -1,0 +1,131 @@
+---
+import Icon from './Icon.astro';
+import { profile } from '../data/profile';
+
+const nav = [
+  { href: '#about', label: 'about' },
+  { href: '#experience', label: 'experience' },
+  { href: '#skills', label: 'skills' },
+  { href: '#work', label: 'work' },
+  { href: '#contact', label: 'contact' },
+];
+---
+<header class="bar">
+  <div class="shell inner">
+    <a class="brand mono" href="#top">
+      <span class="prompt">~/</span><span>{profile.name.split(' ')[0].toLowerCase()}</span><span class="caret" aria-hidden="true"></span>
+    </a>
+
+    <nav class="nav mono" aria-label="Sections">
+      {nav.map((n) => <a href={n.href} data-nav={n.href}>{n.label}</a>)}
+    </nav>
+
+    <button id="theme-toggle" type="button" aria-label="Switch colour theme" title="Switch colour theme">
+      <span class="ico ico-moon"><Icon name="moon" size={16} /></span>
+      <span class="ico ico-sun"><Icon name="sun" size={16} /></span>
+    </button>
+  </div>
+</header>
+
+<style>
+  .bar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    border-bottom: 1px solid transparent;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: border-color 0.25s, background-color 0.25s;
+  }
+
+  .bar.stuck {
+    border-bottom-color: var(--border);
+    /* High enough that long lines of body copy don't ghost through the blur. */
+    background: color-mix(in srgb, var(--bg) 94%, transparent);
+  }
+
+  .inner {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    height: 3.75rem;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-right: auto;
+    white-space: nowrap;
+  }
+
+  .prompt { color: var(--accent); }
+
+  .caret {
+    display: inline-block;
+    width: 0.55em;
+    height: 1.05em;
+    margin-left: 0.15em;
+    background: var(--accent);
+    translate: 0 0.16em;
+    animation: blink 1.15s steps(1, end) infinite;
+  }
+
+  @keyframes blink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
+
+  .nav {
+    display: flex;
+    gap: 1.4rem;
+    font-size: 0.82rem;
+    color: var(--text-dim);
+  }
+
+  .nav a {
+    position: relative;
+    padding-block: 0.35rem;
+    transition: color 0.18s;
+  }
+
+  .nav a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: var(--accent);
+    scale: 0 1;
+    transform-origin: left;
+    transition: scale 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .nav a:hover,
+  .nav a.active { color: var(--text); }
+  .nav a.active::before,
+  .nav a:hover::before { scale: 1 1; }
+
+  #theme-toggle {
+    display: grid;
+    place-items: center;
+    width: 2.1rem;
+    height: 2.1rem;
+    flex: none;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text-dim);
+    background: var(--surface);
+    transition: color 0.18s, border-color 0.18s;
+  }
+
+  #theme-toggle:hover { color: var(--accent); border-color: var(--border-hi); }
+
+  #theme-toggle .ico { grid-area: 1 / 1; display: grid; }
+  :root[data-theme='dark'] .ico-moon { display: none; }
+  :root[data-theme='light'] .ico-sun { display: none; }
+
+  @media (max-width: 720px) {
+    .nav { display: none; }
+  }
+</style>

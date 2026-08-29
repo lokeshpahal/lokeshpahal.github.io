@@ -1,0 +1,200 @@
+/* ---------------------------------------------------------------
+   Tokens
+   Dark is the default. Light is a deliberate, fully-specified
+   alternative — not a washed-out inversion.
+   --------------------------------------------------------------- */
+
+:root {
+  /* dark (default) */
+  --bg:            #08090c;
+  --bg-grid:       rgba(126, 231, 135, 0.045);
+  --surface:       #101319;
+  --surface-hi:    #161b23;
+  --border:        #222834;
+  --border-hi:     #303847;
+
+  --text:          #e4eaf2;
+  --text-dim:      #98a3b4;
+  --text-faint:    #616c7d;
+
+  --accent:        #7ee787;
+  --accent-dim:    #3fb950;
+  --accent-glow:   rgba(126, 231, 135, 0.14);
+  --accent-2:      #79c0ff;
+  --accent-3:      #ffa657;
+
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 12px 32px -12px rgba(0, 0, 0, 0.7);
+
+  --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  --measure: 68ch;
+  --gutter: clamp(1.25rem, 5vw, 3rem);
+  --radius: 10px;
+
+  color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+  --bg:            #fbfbfa;
+  --bg-grid:       rgba(19, 90, 40, 0.05);
+  --surface:       #ffffff;
+  --surface-hi:    #f4f5f3;
+  --border:        #e0e2dd;
+  --border-hi:     #c9ccc5;
+
+  --text:          #14171c;
+  --text-dim:      #545c68;
+  --text-faint:    #838c99;
+
+  --accent:        #1a7f37;
+  --accent-dim:    #2da44e;
+  --accent-glow:   rgba(26, 127, 55, 0.1);
+  --accent-2:      #0969da;
+  --accent-3:      #bc4c00;
+
+  --shadow: 0 1px 2px rgba(20, 23, 28, 0.06), 0 12px 28px -14px rgba(20, 23, 28, 0.18);
+
+  color-scheme: light;
+}
+
+/* ---------------------------------------------------------------
+   Reset
+   --------------------------------------------------------------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+* { margin: 0; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  background-color: var(--bg);
+  /* faint terminal grid, fades out down the page */
+  background-image:
+    linear-gradient(var(--bg-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--bg-grid) 1px, transparent 1px);
+  background-size: 56px 56px, 56px 56px;
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+img, svg, video { display: block; max-width: 100%; height: auto; }
+
+a { color: inherit; text-decoration: none; }
+
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+
+ul, ol { list-style: none; padding: 0; }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+::selection { background: var(--accent-glow); color: var(--text); }
+
+/* ---------------------------------------------------------------
+   Type
+   --------------------------------------------------------------- */
+
+h1, h2, h3, h4 {
+  line-height: 1.15;
+  letter-spacing: -0.021em;
+  font-weight: 650;
+  text-wrap: balance;
+}
+
+p { text-wrap: pretty; }
+
+.mono { font-family: var(--mono); }
+
+/* ---------------------------------------------------------------
+   Layout
+   --------------------------------------------------------------- */
+
+.shell {
+  width: 100%;
+  max-width: 1080px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: clamp(4rem, 10vw, 7rem);
+  border-top: 1px solid var(--border);
+}
+
+.section:first-of-type { border-top: none; }
+
+/* Section heading: `## title` in a terminal-ish key */
+.section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.section-head h2 {
+  font-size: clamp(1.5rem, 3.4vw, 2rem);
+}
+
+.section-head .marker {
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.section-head .rule {
+  flex: 1;
+  min-width: 2rem;
+  height: 1px;
+  background: linear-gradient(90deg, var(--border-hi), transparent);
+}
+
+/* ---------------------------------------------------------------
+   Reveal on scroll (progressive — visible if JS never runs)
+   --------------------------------------------------------------- */
+
+.reveal {
+  opacity: 1;
+  transform: none;
+}
+
+html.js .reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html.js .reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js .reveal { opacity: 1; transform: none; }
+}

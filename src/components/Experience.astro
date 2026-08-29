@@ -1,0 +1,177 @@
+---
+import SectionHead from './SectionHead.astro';
+import { experience } from '../data/profile';
+---
+<section class="section" id="experience">
+  <div class="shell">
+    <SectionHead marker="02 //" title="Experience" />
+
+    <ol class="timeline">
+      {experience.map((job, i) => (
+        <li class="job reveal" style={`--i:${i}`}>
+          <span class="node" aria-hidden="true"></span>
+
+          <div class="card">
+            <header class="head">
+              <div>
+                <h3 class="role">{job.role}</h3>
+                <p class="company">{job.company}{job.location && <span class="loc mono"> · {job.location}</span>}</p>
+              </div>
+              <p class="dates mono">
+                {job.start} <span aria-hidden="true">→</span> {job.end}
+                {job.end === 'Present' && <span class="now">now</span>}
+              </p>
+            </header>
+
+            <p class="summary">{job.summary}</p>
+
+            <ul class="highlights">
+              {job.highlights.map((h) => <li>{h}</li>)}
+            </ul>
+
+            <ul class="stack mono">
+              {job.stack.map((s) => <li>{s}</li>)}
+            </ul>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .timeline {
+    position: relative;
+    display: grid;
+    gap: 1.5rem;
+    padding-left: 1.75rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 0.75rem;
+    bottom: 0.75rem;
+    width: 1px;
+    background: linear-gradient(var(--accent), var(--border) 22%, var(--border));
+  }
+
+  .job { position: relative; }
+
+  html.js .job { transition-delay: calc(var(--i) * 70ms); }
+
+  .node {
+    position: absolute;
+    left: -1.75rem;
+    top: 1.6rem;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--border-hi);
+    transition: border-color 0.22s, box-shadow 0.22s;
+  }
+
+  .job:first-child .node {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-glow);
+  }
+
+  .job:hover .node { border-color: var(--accent); }
+
+  .card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    padding: 1.4rem 1.5rem;
+    transition: border-color 0.22s, background-color 0.22s;
+  }
+
+  .job:hover .card { border-color: var(--border-hi); background: var(--surface-hi); }
+
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.85rem;
+  }
+
+  .role { font-size: 1.08rem; font-weight: 650; }
+
+  .company { color: var(--accent-2); font-size: 0.92rem; margin-top: 0.15rem; }
+
+  .loc { color: var(--text-faint); font-size: 0.8rem; }
+
+  .dates {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+    color: var(--text-faint);
+    white-space: nowrap;
+  }
+
+  .now {
+    padding: 0.1rem 0.45rem;
+    border-radius: 999px;
+    background: var(--accent-glow);
+    color: var(--accent);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .summary {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    max-width: var(--measure);
+  }
+
+  .highlights {
+    display: grid;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    max-width: var(--measure);
+  }
+
+  .highlights li {
+    position: relative;
+    padding-left: 1.35rem;
+    color: var(--text-dim);
+    font-size: 0.93rem;
+    line-height: 1.65;
+  }
+
+  .highlights li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--accent);
+    font-size: 0.85rem;
+  }
+
+  .stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 1.2rem;
+  }
+
+  .stack li {
+    padding: 0.2rem 0.55rem;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    font-size: 0.73rem;
+    color: var(--text-faint);
+    background: var(--bg);
+  }
+
+  @media (max-width: 560px) {
+    .head { flex-direction: column; }
+  }
+</style>

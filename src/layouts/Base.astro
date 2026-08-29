@@ -1,0 +1,81 @@
+---
+import '../styles/global.css';
+import { profile } from '../data/profile';
+
+interface Props { title?: string; description?: string; }
+const {
+  title = `${profile.name} — ${profile.role}`,
+  description = profile.metaDescription,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+---
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={profile.name} />
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(profile.avatar, Astro.site).href} />
+    <meta name="twitter:card" content="summary" />
+
+    <meta name="google-site-verification" content="Tmws0BGD1V6NQ4vtspaINuUpDWjJXkWFHLy1z9KUvy0" />
+    <meta name="theme-color" content="#08090c" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#fbfbfa" media="(prefers-color-scheme: light)" />
+
+    <link rel="icon" href="/ico/favicon.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="/ico/apple-touch-icon-144-precomposed.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    />
+
+    {/*
+      Set the theme before first paint so there is no flash.
+      The site is dark by default on purpose — light is opt-in via the
+      toggle, and remembered from then on.
+    */}
+    <script is:inline>
+      (function () {
+        document.documentElement.classList.add('js');
+        try {
+          var saved = localStorage.getItem('theme');
+          if (saved === 'light' || saved === 'dark') {
+            document.documentElement.dataset.theme = saved;
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <slot />
+
+    <style>
+      .skip {
+        position: absolute;
+        left: -9999px;
+        top: 0.5rem;
+        z-index: 100;
+        padding: 0.6rem 1rem;
+        background: var(--surface-hi);
+        border: 1px solid var(--border-hi);
+        border-radius: var(--radius);
+        font-family: var(--mono);
+        font-size: 0.85rem;
+      }
+      .skip:focus { left: 0.5rem; }
+    </style>
+  </body>
+</html>

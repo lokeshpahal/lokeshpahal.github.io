@@ -1,0 +1,73 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+---
+<Base title="404 — Not found" description="That page does not exist.">
+  <main class="wrap">
+    <div class="term mono">
+      <p><span class="ps1">$</span> cd {Astro.url.pathname}</p>
+      <p class="err">bash: cd: {Astro.url.pathname}: No such file or directory</p>
+      <p><span class="ps1">$</span> <span class="cursor" aria-hidden="true"></span></p>
+    </div>
+    <h1>404</h1>
+    <p class="sub">This page never existed, or it did and I moved it. Either way — sorry.</p>
+    <a class="btn mono" href="/">Take me home <Icon name="arrow" size={16} /></a>
+  </main>
+</Base>
+
+<style>
+  .wrap {
+    min-height: 100dvh;
+    display: grid;
+    align-content: center;
+    justify-items: start;
+    gap: 1.25rem;
+    max-width: 640px;
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  .term {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    padding: 1.1rem 1.25rem;
+    font-size: 0.85rem;
+    line-height: 1.9;
+    color: var(--text-dim);
+    overflow-x: auto;
+  }
+
+  .ps1 { color: var(--accent); margin-right: 0.5rem; font-weight: 600; }
+  .err { color: #f85149; }
+
+  .cursor {
+    display: inline-block;
+    width: 0.6em;
+    height: 1.05em;
+    background: var(--accent);
+    translate: 0 0.16em;
+    animation: blink 1.15s steps(1, end) infinite;
+  }
+
+  @keyframes blink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
+
+  h1 { font-size: clamp(3rem, 12vw, 5rem); letter-spacing: -0.05em; }
+  .sub { color: var(--text-dim); }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.62rem 1.1rem;
+    border-radius: var(--radius);
+    background: var(--accent);
+    color: var(--bg);
+    font-size: 0.84rem;
+    font-weight: 600;
+    transition: background-color 0.18s, translate 0.18s;
+  }
+
+  .btn:hover { background: var(--accent-dim); translate: 0 -2px; }
+</style>

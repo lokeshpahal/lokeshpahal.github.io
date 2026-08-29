@@ -1,0 +1,9 @@
+---
+interface Props { marker: string; title: string; }
+const { marker, title } = Astro.props;
+---
+<div class="section-head reveal">
+  <span class="marker">{marker}</span>
+  <h2>{title}</h2>
+  <span class="rule"></span>
+</div>
