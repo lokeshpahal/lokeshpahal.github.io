@@ -68,11 +68,23 @@ export type Experience = {
 };
 
 /**
- * The technology in each period is drawn from what you were actually pushing
- * to GitHub at the time. Employer names for the two earlier periods, your job
- * titles, and exact start/end dates are not public — hence CONFIRM.
+ * ─── The Experience section is currently HIDDEN ──────────────────────────
+ *
+ * `experience` below is empty, so the section and its nav link do not render
+ * and the remaining sections renumber themselves. Nothing else needs changing.
+ *
+ * TO BRING IT BACK: fill in the CONFIRM fields in `experienceDraft` below,
+ * then change this line to:
+ *
+ *     export const experience: Experience[] = experienceDraft;
+ *
+ * The draft is kept verbatim so no work was lost. Its technology and
+ * highlights are drawn from what you were actually pushing to GitHub in each
+ * period; only the employer names, titles and dates are missing.
  */
-export const experience: Experience[] = [
+export const experience: Experience[] = [];
+
+export const experienceDraft: Experience[] = [
   {
     company: 'Code Genesys',
     role: 'CONFIRM — your title here',

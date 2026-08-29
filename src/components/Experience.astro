@@ -1,10 +1,11 @@
 ---
 import SectionHead from './SectionHead.astro';
+import { marker } from '../data/sections';
 import { experience } from '../data/profile';
 ---
 <section class="section" id="experience">
   <div class="shell">
-    <SectionHead marker="02 //" title="Experience" />
+    <SectionHead marker={marker('experience')} title="Experience" />
 
     <ol class="timeline">
       {experience.map((job, i) => (

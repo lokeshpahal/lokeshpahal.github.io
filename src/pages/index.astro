@@ -8,6 +8,7 @@ import Skills from '../components/Skills.astro';
 import Projects from '../components/Projects.astro';
 import Contact from '../components/Contact.astro';
 import { profile, socials, experience } from '../data/profile';
+import { isVisible } from '../data/sections';
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -20,17 +21,18 @@ const jsonLd = {
   email: `mailto:${profile.email}`,
   address: { '@type': 'PostalAddress', addressLocality: 'Gurgaon', addressRegion: 'Haryana', addressCountry: 'IN' },
   sameAs: socials.filter((s) => s.icon !== 'mail').map((s) => s.url),
-  worksFor: { '@type': 'Organization', name: experience[0]?.company ?? '' },
+  // Omitted rather than emitted empty while the experience data is unset.
+  ...(experience[0] ? { worksFor: { '@type': 'Organization', name: experience[0].company } } : {}),
 };
 ---
 <Base>
   <Header />
   <main id="main">
     <Hero />
-    <About />
-    <Experience />
-    <Skills />
-    <Projects />
+    {isVisible('about') && <About />}
+    {isVisible('experience') && <Experience />}
+    {isVisible('skills') && <Skills />}
+    {isVisible('work') && <Projects />}
     <Contact />
   </main>
 

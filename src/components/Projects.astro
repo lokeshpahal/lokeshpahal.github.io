@@ -1,11 +1,12 @@
 ---
 import SectionHead from './SectionHead.astro';
+import { marker } from '../data/sections';
 import Icon from './Icon.astro';
 import { projects } from '../data/profile';
 ---
 <section class="section" id="work">
   <div class="shell">
-    <SectionHead marker="04 //" title="Selected work" />
+    <SectionHead marker={marker('work')} title="Selected work" />
 
     <div class="grid">
       {projects.map((p, i) => (

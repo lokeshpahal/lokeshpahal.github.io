@@ -1,14 +1,10 @@
 ---
 import Icon from './Icon.astro';
 import { profile } from '../data/profile';
+import { sections } from '../data/sections';
 
-const nav = [
-  { href: '#about', label: 'about' },
-  { href: '#experience', label: 'experience' },
-  { href: '#skills', label: 'skills' },
-  { href: '#work', label: 'work' },
-  { href: '#contact', label: 'contact' },
-];
+// Nav mirrors whichever sections actually render.
+const nav = sections.map((s) => ({ href: `#${s.id}`, label: s.label }));
 ---
 <header class="bar">
   <div class="shell inner">

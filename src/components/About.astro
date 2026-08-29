@@ -1,11 +1,12 @@
 ---
 import SectionHead from './SectionHead.astro';
+import { marker } from '../data/sections';
 import Icon from './Icon.astro';
 import { about, education, profile } from '../data/profile';
 ---
 <section class="section" id="about">
   <div class="shell">
-    <SectionHead marker="01 //" title="About" />
+    <SectionHead marker={marker('about')} title="About" />
 
     <div class="cols">
       <div class="prose reveal">
