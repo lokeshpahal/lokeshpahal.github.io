@@ -15,7 +15,7 @@ const jsonLd = {
   name: profile.name,
   jobTitle: profile.role,
   description: profile.metaDescription,
-  url: 'https://lokeshpahal.com',
+  url: Astro.site?.href ?? 'https://lokeshpahal.github.io',
   image: new URL(profile.avatar, Astro.site).href,
   email: `mailto:${profile.email}`,
   address: { '@type': 'PostalAddress', addressLocality: 'Gurgaon', addressRegion: 'Haryana', addressCountry: 'IN' },
