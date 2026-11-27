@@ -14,8 +14,8 @@ export const spruce = {
   tagline: 'Keep Ubuntu clean, fast and safe.',
   summary:
     'A native desktop app that finds and removes junk, shows exactly what fills your drive, uninstalls apps without leaving a trace, keeps every kind of software up to date, and checks your security settings — all from one window, and all without ever deleting something you did not confirm.',
-  version: '0.6.1',
-  download: 'https://github.com/PahalSoft/spruce/releases/download/v0.6.1/spruce_0.6.1_all.deb',
+  version: '0.6.2',
+  download: 'https://github.com/PahalSoft/spruce/releases/download/v0.6.2/spruce_0.6.2_all.deb',
   repo: 'https://github.com/PahalSoft/spruce',
   year: '2026',
   license: 'GPL-3.0-or-later',
