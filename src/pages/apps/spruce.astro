@@ -8,7 +8,7 @@ import { profile } from '../../data/profile';
 import { spruce as app } from '../../data/apps';
 
 const [hero, ...gallery] = app.shots;
-const sourceMail = `mailto:${profile.email}?subject=${encodeURIComponent(`${app.name} — source request`)}`;
+const mailTo = (subject: string) => `mailto:${profile.email}?subject=${encodeURIComponent(subject)}`;
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -18,7 +18,12 @@ const jsonLd = {
   applicationCategory: 'UtilitiesApplication',
   operatingSystem: app.platform,
   softwareVersion: app.version,
+  downloadUrl: app.download,
   license: `https://spdx.org/licenses/${app.license}.html`,
+  offers: [
+    { '@type': 'Offer', name: 'Spruce', price: '0', priceCurrency: 'USD' },
+    { '@type': 'Offer', name: 'Spruce Pro', price: '24', priceCurrency: 'USD' },
+  ],
   image: new URL(hero.src, Astro.site).href,
   screenshot: app.shots.map((s) => new URL(s.src, Astro.site).href),
   author: { '@type': 'Person', name: profile.name, url: Astro.site?.href },
@@ -49,9 +54,10 @@ const jsonLd = {
         </ul>
 
         <div class="cta">
-          <a class="btn primary" href="#features">See the features <Icon name="arrow" size={16} /></a>
-          <a class="btn" href="#screens">Screenshots</a>
-          <a class="btn" href={sourceMail}>Ask for the source</a>
+          <a class="btn primary" href={app.download}>Download free <Icon name="arrow" size={16} /></a>
+          <a class="btn" href="#features">Features</a>
+          <a class="btn" href="#pricing">Pricing</a>
+          <a class="btn" href={app.repo} target="_blank" rel="noopener"><Icon name="github" size={15} /> Source</a>
         </div>
 
         <figure class="window hero-shot reveal">
@@ -77,7 +83,10 @@ const jsonLd = {
           {app.features.map((f, i) => (
             <article class="feature reveal" style={`--i:${i % 3}`}>
               <span class="idx mono">{String(i + 1).padStart(2, '0')}</span>
-              <h3>{f.name}</h3>
+              <h3>
+                {f.name}
+                {f.tier && <span class="pro-tag mono">{f.tier === 'pro' ? 'Pro' : 'partly Pro'}</span>}
+              </h3>
               <p class="f-sum">{f.summary}</p>
               <ul class="points">
                 {f.points.map((pt) => <li>{pt}</li>)}
@@ -186,23 +195,56 @@ const jsonLd = {
     </section>
 
     <!-- ───────────── get it ───────────── -->
+    <section class="section" id="pricing">
+      <div class="shell">
+        <SectionHead marker="06 //" title="Free or Pro" />
+        <p class="lead">{app.pricing.intro}</p>
+        <div class="plans">
+          {app.pricing.plans.map((plan) => (
+            <article class:list={['plan', 'reveal', { highlight: plan.highlight }]}>
+              <h3>{plan.name}</h3>
+              <p class="price">{plan.price}{plan.per && <small> {plan.per}</small>}</p>
+              <p class="plan-note">{plan.note}</p>
+              <ul class="points">
+                {plan.points.map((pt) => <li>{pt}</li>)}
+              </ul>
+              <a class:list={['btn', { primary: plan.highlight }]} href={plan.href ?? mailTo(plan.ctaSubject)}>{plan.cta}</a>
+            </article>
+          ))}
+        </div>
+        <div class="plan-notes">
+          {app.pricing.notes.map((n) => (
+            <div class="reveal">
+              <h3>{n.title}</h3>
+              <p>{n.detail}</p>
+            </div>
+          ))}
+        </div>
+        <p class="note">Spruce Pro isn’t in an online shop yet: the button opens an email, and your licence arrives by reply.</p>
+      </div>
+    </section>
+
     <section class="section" id="get">
       <div class="shell">
-        <SectionHead marker="06 //" title="Get Spruce" />
+        <SectionHead marker="07 //" title="Get Spruce" />
         <div class="get reveal">
           <div>
             <p class="lead">
-              Spruce runs on {app.platform}, and installs as a single .deb. The source isn’t public yet — if you’d
-              like to try it or look at the code, get in touch.
+              Spruce runs on {app.platform}, and installs as a single .deb:
+              <code>sudo apt install ./spruce_{app.version}_all.deb</code>. The app is free and its source is on
+              GitHub; Spruce Pro is a $24 add-on with a 14-day trial inside the app.
             </p>
             <dl class="facts mono">
               <div><dt>version</dt><dd>{app.version}</dd></div>
-              <div><dt>licence</dt><dd>{app.license}</dd></div>
+              <div><dt>licence</dt><dd>{app.license} (app) · proprietary (Pro add-on)</dd></div>
+              <div><dt>pro</dt><dd>$24 once, with a year of updates</dd></div>
               <div><dt>needs</dt><dd>Python 3.11+, GTK 4, libadwaita 1.6+</dd></div>
             </dl>
           </div>
           <div class="get-cta">
-            <a class="btn primary" href={sourceMail}>Ask for the source <Icon name="mail" size={15} /></a>
+            <a class="btn primary" href={app.download}>Download free (.deb)</a>
+            <a class="btn" href={mailTo('Buy Spruce Pro')}>Buy Spruce Pro <Icon name="mail" size={15} /></a>
+            <a class="btn" href={app.repo} target="_blank" rel="noopener"><Icon name="github" size={15} /> Source</a>
             <a class="btn" href="/#work"><span class="back" aria-hidden="true">←</span> All work</a>
           </div>
         </div>
@@ -520,6 +562,73 @@ const jsonLd = {
   .m-label { font-size: 0.72rem; color: var(--accent); }
   .timeline h3 { margin-top: 0.3rem; }
 
+  /* ---------- pricing ---------- */
+
+  .pro-tag {
+    display: inline-block;
+    margin-left: 0.45rem;
+    padding: 0.05rem 0.45rem;
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    font-size: 0.66rem;
+    font-weight: 600;
+    color: var(--accent);
+    vertical-align: middle;
+    letter-spacing: 0.02em;
+  }
+
+  .plans {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    max-width: 820px;
+  }
+
+  .plan {
+    display: flex;
+    flex-direction: column;
+    padding: 1.6rem 1.6rem 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+
+  .plan.highlight { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent-glow), var(--shadow); }
+
+  .plan h3 { font-size: 1.05rem; }
+
+  .price {
+    margin-top: 0.4rem;
+    font-family: var(--mono);
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: -0.03em;
+  }
+
+  .price small { font-size: 0.9rem; color: var(--text-dim); font-weight: 500; }
+
+  .plan-note { font-size: 0.85rem; color: var(--text-faint); margin-top: 0.15rem; }
+
+  .plan .points { margin: 1rem 0 1.4rem; flex: 1; }
+
+  .plan .btn { justify-content: center; }
+
+  .plan-notes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem 2rem;
+    margin-top: 2rem;
+    max-width: 980px;
+  }
+
+  .plan-notes h3 { font-size: 0.98rem; }
+  .plan-notes p { margin-top: 0.3rem; font-size: 0.9rem; color: var(--text-dim); }
+
+  @media (max-width: 700px) {
+    .plans { grid-template-columns: 1fr; }
+  }
+
   /* ---------- get it ---------- */
 
   .get {
@@ -542,6 +651,16 @@ const jsonLd = {
   .facts dd { margin: 0; color: var(--text-dim); }
 
   .back { font-family: var(--mono); }
+
+  .get code {
+    font-family: var(--mono);
+    font-size: 0.85em;
+    padding: 0.1rem 0.35rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--bg);
+    white-space: nowrap;
+  }
 
   @media (max-width: 760px) {
     .get { grid-template-columns: 1fr; }
