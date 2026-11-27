@@ -161,11 +161,24 @@ export type Project = {
   tags: string[];
   url?: string;
   repo?: string;
+  /** A page on this site about the project, e.g. '/apps/spruce/'. */
+  page?: string;
+  /** A screenshot; giving one makes the card a full-width featured card. */
+  image?: string;
   year?: string;
 };
 
 /** All real, all public. Reorder freely — the first ones get read most. */
 export const projects: Project[] = [
+  {
+    name: 'Spruce',
+    blurb:
+      'A native Ubuntu app that keeps the system clean, fast and safe: junk cleanup, a disk-space map, duplicate and similar-photo finding, a complete uninstaller, unified updates, performance and security checks. Built with GTK 4, and careful by design — nothing is deleted without a yes.',
+    tags: ['Python', 'GTK 4', 'Linux', 'Desktop app'],
+    page: '/apps/spruce/',
+    image: '/apps/spruce/smart-scan.webp',
+    year: '2026',
+  },
   {
     name: 'Haryana Schools Map',
     blurb:

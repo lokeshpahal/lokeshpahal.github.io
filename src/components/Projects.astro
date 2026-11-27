@@ -10,9 +10,10 @@ import { projects } from '../data/profile';
 
     <div class="grid">
       {projects.map((p, i) => (
-        <article class="card reveal" style={`--i:${i}`}>
+        <article class:list={['card', 'reveal', { featured: p.image }]} style={`--i:${i}`}>
+          <div class="body">
           <header class="head">
-            <h3 class="name">{p.name}</h3>
+            <h3 class="name">{p.page ? <a href={p.page}>{p.name}</a> : p.name}</h3>
             {p.year && <span class="year mono">{p.year}</span>}
           </header>
 
@@ -23,6 +24,11 @@ import { projects } from '../data/profile';
           </ul>
 
           <footer class="links mono">
+            {p.page && (
+              <a href={p.page} class="more">
+                features &amp; screenshots <Icon name="arrow" size={13} />
+              </a>
+            )}
             {p.url && (
               <a href={p.url} target="_blank" rel="noopener">
                 live <Icon name="external" size={13} />
@@ -34,6 +40,12 @@ import { projects } from '../data/profile';
               </a>
             )}
           </footer>
+          </div>
+          {p.image && (
+            <a class="shot" href={p.page ?? p.url ?? p.repo} tabindex="-1" aria-hidden="true">
+              <img src={p.image} alt="" width="1024" height="760" loading="lazy" decoding="async" />
+            </a>
+          )}
         </article>
       ))}
     </div>
@@ -91,6 +103,31 @@ import { projects } from '../data/profile';
   }
 
   .name { font-size: 1.05rem; font-weight: 650; }
+
+  .body { display: flex; flex-direction: column; flex: 1; }
+
+  /* A featured project spans the whole row, with a screenshot beside the text. */
+  .card.featured {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    gap: clamp(1.25rem, 3vw, 2rem);
+    align-items: center;
+  }
+
+  .shot {
+    display: block;
+    border: 1px solid var(--border-hi);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+
+  .shot img { width: 100%; height: auto; }
+
+  @media (max-width: 760px) {
+    .card.featured { grid-template-columns: 1fr; }
+  }
   .year { font-size: 0.76rem; color: var(--text-faint); flex: none; }
 
   .blurb {
@@ -129,6 +166,9 @@ import { projects } from '../data/profile';
   }
 
   .links a:hover { color: var(--accent); }
+  .links .more { color: var(--accent); }
+  .name a { transition: color 0.18s; }
+  .name a:hover { color: var(--accent); }
 
   .links:empty { display: none; }
 </style>

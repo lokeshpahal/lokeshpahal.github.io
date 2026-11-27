@@ -45,12 +45,15 @@ at GitHub Pages.
 ```
 src/
   data/profile.ts     all site content
+  data/apps.ts        content for the app pages (features, screenshots, …)
   pages/index.astro   the page; also emits Person JSON-LD
+  pages/apps/*.astro  one page per app, e.g. /apps/spruce/ (SoftwareApplication JSON-LD)
   pages/404.astro
   layouts/Base.astro  <head>, fonts, theme bootstrap
-  components/         Hero, About, Experience, Skills, Projects, Contact
+  components/         Hero, About, Experience, Skills, Projects, Contact,
+                      PageScripts (theme toggle, reveal, sticky header for every page)
   styles/global.css   design tokens, reset, shared primitives
-public/               static files served as-is
+public/               static files served as-is (app screenshots in public/apps/<app>/)
 ```
 
 ## Theming
