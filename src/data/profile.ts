@@ -173,7 +173,7 @@ export const projects: Project[] = [
   {
     name: 'Spruce',
     blurb:
-      'A native Ubuntu app that keeps the system clean, fast and safe: junk cleanup, a disk-space map, duplicate and similar-photo finding, a complete uninstaller, unified updates, performance and security checks. Built with GTK 4, careful by design — nothing is deleted without a yes — and free, with a $24 Pro add-on.',
+      'A native Ubuntu app that keeps the system clean, fast and safe: junk cleanup, a disk-space map, duplicate and similar-photo finding, a complete uninstaller, unified updates, performance and security checks. Built with GTK 4, careful by design — nothing is deleted without a yes — and free and open source.',
     tags: ['Python', 'GTK 4', 'Linux', 'Desktop app'],
     page: '/apps/spruce/',
     repo: 'https://github.com/PahalSoft/spruce',
