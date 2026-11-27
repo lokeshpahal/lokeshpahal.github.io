@@ -3,10 +3,7 @@
  * Like profile.ts: edit here, the page lays it out.
  */
 
-/** `tier`: 'pro' = Spruce Pro; 'part' = some of it is Pro (those points say so). */
-export type Feature = { name: string; summary: string; points: string[]; tier?: 'pro' | 'part' };
-/** A plan's button goes to `href` if set, otherwise opens an email with `ctaSubject`. */
-export type Plan = { name: string; price: string; per: string; note: string; points: string[]; cta: string; ctaSubject: string; href?: string; highlight?: boolean };
+export type Feature = { name: string; summary: string; points: string[] };
 export type Shot = { src: string; alt: string; caption: string };
 export type Milestone = { label: string; title: string; detail: string };
 
@@ -17,15 +14,15 @@ export const spruce = {
   tagline: 'Keep Ubuntu clean, fast and safe.',
   summary:
     'A native desktop app that finds and removes junk, shows exactly what fills your drive, uninstalls apps without leaving a trace, keeps every kind of software up to date, and checks your security settings — all from one window, and all without ever deleting something you did not confirm.',
-  version: '0.5.0',
-  download: 'https://github.com/PahalSoft/spruce/releases/download/v0.5.0/spruce_0.5.0_all.deb',
+  version: '0.6.0',
+  download: 'https://github.com/PahalSoft/spruce/releases/download/v0.6.0/spruce_0.6.0_all.deb',
   repo: 'https://github.com/PahalSoft/spruce',
   year: '2026',
   license: 'GPL-3.0-or-later',
   platform: 'Ubuntu 24.04 or newer with GNOME',
-  badges: ['Ubuntu 24.04+', 'GTK 4 · libadwaita', 'Python', 'Free + Pro', '.deb package'],
+  badges: ['Ubuntu 24.04+', 'GTK 4 · libadwaita', 'Python', 'Free & open source', '.deb package'],
   metaDescription:
-    'Spruce — a native Ubuntu app by Lokesh Pahal that cleans junk, maps disk usage, finds duplicates and similar photos, uninstalls apps completely, unifies updates, checks security and scans for viruses. Free, with Spruce Pro from $24.',
+    'Spruce — a native Ubuntu app by Lokesh Pahal that cleans junk, maps disk usage, finds duplicates and similar photos, uninstalls apps completely, unifies updates, checks security and scans for viruses. Free and open source.',
 
   /** Checkable numbers from the project itself. */
   stats: [
@@ -61,17 +58,16 @@ export const spruce = {
       points: [
         'Big folders are big tiles; click a tile to look inside',
         'Home folder, whole drive, or any folder you choose',
-        'Maps a 130 GB home folder in about 7 seconds',
+        'Stays on one drive and groups small files, so even huge folders stay readable',
       ],
     },
     {
       name: 'My Files',
-      tier: 'part',
       summary: 'Large, forgotten, duplicate and look-alike files.',
       points: [
         'Large & Old: filter by size and by how long since a file was opened',
-        'Duplicates (Pro): compared by content, never by name — one copy is always kept',
-        'Similar Photos (Pro): finds resized and re-saved copies by how they look, and keeps the sharpest',
+        'Duplicates: compared by content, never by name — one copy is always kept',
+        'Similar Photos: finds resized and re-saved copies by how they look, and keeps the sharpest',
       ],
     },
     {
@@ -93,7 +89,6 @@ export const spruce = {
     },
     {
       name: 'Performance',
-      tier: 'pro',
       summary: 'What is using your memory and processor, and why startup is slow.',
       points: [
         'Running apps grouped by program, with Quit and Force Quit',
@@ -112,7 +107,6 @@ export const spruce = {
     },
     {
       name: 'Cloud',
-      tier: 'pro',
       summary: 'What fills your Google Drive or OneDrive.',
       points: [
         'Largest files in the cloud, read through GNOME Online Accounts or rclone',
@@ -122,7 +116,6 @@ export const spruce = {
     },
     {
       name: 'Weekly check & top-bar monitor',
-      tier: 'pro',
       summary: 'Spruce keeps an eye on things when it is closed.',
       points: [
         'A weekly background check that only measures, and notifies you when something needs a look',
@@ -164,37 +157,12 @@ export const spruce = {
 
   tech: ['Python 3', 'GTK 4', 'libadwaita', 'PyGObject', 'polkit', 'systemd', 'GNOME Shell (GJS)', 'ClamAV', 'apt · Snap · Flatpak · fwupd', 'Debian packaging'],
 
-  /** Pricing. Buying is by email until there is a shop. */
-  pricing: {
+  /** Spruce is free; supporters can buy the developer a coffee. */
+  support: {
+    url: 'https://buymeacoffee.com/pahalokesh',
     intro:
-      'The cleaning, the safety rules and the security checks are free, and stay free. Spruce Pro adds the tools for going deeper — and the app has a 14-day free trial of everything, with no card and no account.',
-    plans: [
-      {
-        name: 'Spruce',
-        price: 'Free',
-        per: '',
-        note: 'Free software, GPL-3.0',
-        points: ['Smart Scan and Cleanup', 'Space Map of any folder', 'Large & old files', 'Complete uninstaller and leftovers', 'Every update in one place', 'Security checks and virus scanning'],
-        cta: 'Download free (.deb)',
-        ctaSubject: 'Spruce',
-        href: 'https://github.com/PahalSoft/spruce/releases/download/v0.5.0/spruce_0.5.0_all.deb',
-      },
-      {
-        name: 'Spruce Pro',
-        price: '$24',
-        per: 'once',
-        note: 'Includes a year of updates. Keep it for ever.',
-        points: ['Everything in Spruce, plus:', 'Duplicates and Similar Photos', 'Performance: running apps, startup apps, boot time', 'Cloud storage report', 'The weekly check and the top-bar monitor'],
-        cta: 'Buy Spruce Pro',
-        ctaSubject: 'Buy Spruce Pro',
-        highlight: true,
-      },
-    ] satisfies Plan[],
-    notes: [
-      { title: 'A year of updates', detail: 'Pro keeps working for ever in every version released during your year. Later versions are optional — renew to unlock them, or keep the one you have.' },
-      { title: 'Checked on your computer', detail: 'There is no activation server. Spruce never contacts anyone to see whether you paid.' },
-      { title: 'Try first', detail: 'The 14-day trial unlocks everything, so purchases are final — except where your local law gives you more rights.' },
-    ],
+      'Every part of Spruce is free and open source — no ads, no tracking, no account and nothing locked. If it saved you some time or a few gigabytes, a coffee helps keep it going: new cleanup rules, fixes for new Ubuntu releases, and new tools.',
+    note: 'Entirely optional. Spruce works the same either way.',
   },
 
   milestones: [
@@ -203,6 +171,6 @@ export const spruce = {
     { label: 'Phase 3', title: 'Health', detail: 'Running and startup apps, boot time, security checks, virus scanning.' },
     { label: 'Phase 4', title: 'Always on', detail: 'Similar photos, cloud storage, the weekly check and the top-bar monitor.' },
     { label: 'Release', title: 'Packaged', detail: 'A root-owned helper with its own polkit policy, an icon, and a single .deb.' },
-    { label: '0.5', title: 'Spruce Pro', detail: 'Open core: a free GPL app and a paid add-on, with offline licences and a 14-day trial.' },
+    { label: '0.6', title: 'All free', detail: 'Every feature free and open source under the GPL, supported by people who buy a coffee.' },
   ] satisfies Milestone[],
 };
