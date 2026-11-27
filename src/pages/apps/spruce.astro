@@ -59,7 +59,7 @@ const jsonLd = {
         </div>
 
         <figure class="window hero-shot reveal">
-          <img src={hero.src} alt={hero.alt} width="1024" height="760" loading="eager" fetchpriority="high" />
+          <img src={hero.src} alt={hero.alt} width="1024" height="768" loading="eager" fetchpriority="high" />
         </figure>
 
         <ul class="stats">
@@ -102,13 +102,13 @@ const jsonLd = {
           {gallery.map((s) => (
             <figure class="shot reveal">
               <a class="window" href={s.src} target="_blank" rel="noopener" aria-label={`${s.caption} — open full size`}>
-                <img src={s.src} alt={s.alt} width="1024" height="760" loading="lazy" decoding="async" />
+                <img src={s.src} alt={s.alt} width="1024" height="768" loading="lazy" decoding="async" />
               </a>
               <figcaption class="mono">{s.caption}</figcaption>
             </figure>
           ))}
         </div>
-        <p class="note">Space Map is shown with an example home folder.</p>
+        <p class="note">Space Map and Duplicates are shown with an example home folder.</p>
       </div>
     </section>
 

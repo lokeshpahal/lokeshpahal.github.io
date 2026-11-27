@@ -14,8 +14,8 @@ export const spruce = {
   tagline: 'Keep Ubuntu clean, fast and safe.',
   summary:
     'A native desktop app that finds and removes junk, shows exactly what fills your drive, uninstalls apps without leaving a trace, keeps every kind of software up to date, and checks your security settings — all from one window, and all without ever deleting something you did not confirm.',
-  version: '0.6.3',
-  download: 'https://github.com/PahalSoft/spruce/releases/download/v0.6.3/spruce_0.6.3_all.deb',
+  version: '0.6.4',
+  download: 'https://github.com/PahalSoft/spruce/releases/latest/download/spruce_all.deb',
   repo: 'https://github.com/PahalSoft/spruce',
   year: '2026',
   license: 'GPL-3.0-or-later',
@@ -136,9 +136,10 @@ export const spruce = {
   ],
 
   shots: [
-    { src: '/apps/spruce/smart-scan.webp', alt: 'Spruce Smart Scan showing 9.8 GB that can be freed, 89 updates and 3 security issues', caption: 'Smart Scan — one button, one summary' },
+    { src: '/apps/spruce/smart-scan.webp', alt: 'Spruce Smart Scan showing 12.3 GB that can be freed, 89 updates and 3 security issues', caption: 'Smart Scan — one button, one summary' },
     { src: '/apps/spruce/cleanup.webp', alt: 'Spruce Cleanup list with sizes and explanations for each item', caption: 'Cleanup — every item explained' },
     { src: '/apps/spruce/space-map.webp', alt: 'Spruce Space Map treemap of an example home folder', caption: 'Space Map — click a tile to look inside' },
+    { src: '/apps/spruce/duplicates.webp', alt: 'Spruce Duplicates: sets of identical files, with the copy to keep marked', caption: 'Duplicates — one copy of each is always kept' },
     { src: '/apps/spruce/applications.webp', alt: 'Spruce Applications list with app icons, sizes and Uninstall buttons', caption: 'Applications — apt, Snap and Flatpak together' },
     { src: '/apps/spruce/updates.webp', alt: 'Spruce Updates page listing Ubuntu package and Snap updates', caption: 'Updates — every source in one list' },
     { src: '/apps/spruce/boot.webp', alt: 'Spruce Boot and Maintenance view breaking down a 43.8 second startup', caption: 'Performance — where startup time goes' },
