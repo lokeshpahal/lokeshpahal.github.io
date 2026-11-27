@@ -1,0 +1,551 @@
+---
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import Icon from '../../components/Icon.astro';
+import PageScripts from '../../components/PageScripts.astro';
+import { profile } from '../../data/profile';
+import { spruce as app } from '../../data/apps';
+
+const [hero, ...gallery] = app.shots;
+const sourceMail = `mailto:${profile.email}?subject=${encodeURIComponent(`${app.name} — source request`)}`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: app.name,
+  description: app.summary,
+  applicationCategory: 'UtilitiesApplication',
+  operatingSystem: app.platform,
+  softwareVersion: app.version,
+  license: `https://spdx.org/licenses/${app.license}.html`,
+  image: new URL(hero.src, Astro.site).href,
+  screenshot: app.shots.map((s) => new URL(s.src, Astro.site).href),
+  author: { '@type': 'Person', name: profile.name, url: Astro.site?.href },
+};
+---
+<Base title={`${app.name} — ${app.tagline} · ${profile.name}`} description={app.metaDescription} image={hero.src}>
+  <Header base="/" />
+  <main id="main">
+    <!-- ───────────── hero ───────────── -->
+    <section class="hero" id="top">
+      <div class="shell">
+        <nav class="crumbs mono" aria-label="Breadcrumb">
+          <a href="/#work">~/work</a><span aria-hidden="true">/</span><span>{app.slug}</span>
+        </nav>
+
+        <div class="intro">
+          <img class="app-icon" src={app.icon} alt="" width="96" height="96" />
+          <div>
+            <h1>{app.name}</h1>
+            <p class="tagline">{app.tagline}</p>
+          </div>
+        </div>
+
+        <p class="summary">{app.summary}</p>
+
+        <ul class="badges mono" aria-label="Platform and licence">
+          {app.badges.map((b) => <li>{b}</li>)}
+        </ul>
+
+        <div class="cta">
+          <a class="btn primary" href="#features">See the features <Icon name="arrow" size={16} /></a>
+          <a class="btn" href="#screens">Screenshots</a>
+          <a class="btn" href={sourceMail}>Ask for the source</a>
+        </div>
+
+        <figure class="window hero-shot reveal">
+          <img src={hero.src} alt={hero.alt} width="1024" height="760" loading="eager" fetchpriority="high" />
+        </figure>
+
+        <ul class="stats">
+          {app.stats.map((s) => (
+            <li>
+              <span class="stat-v mono">{s.value}</span>
+              <span class="stat-l">{s.label}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- ───────────── features ───────────── -->
+    <section class="section" id="features">
+      <div class="shell">
+        <SectionHead marker="01 //" title="Everything in one window" />
+        <div class="features">
+          {app.features.map((f, i) => (
+            <article class="feature reveal" style={`--i:${i % 3}`}>
+              <span class="idx mono">{String(i + 1).padStart(2, '0')}</span>
+              <h3>{f.name}</h3>
+              <p class="f-sum">{f.summary}</p>
+              <ul class="points">
+                {f.points.map((pt) => <li>{pt}</li>)}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────── screenshots ───────────── -->
+    <section class="section" id="screens">
+      <div class="shell">
+        <SectionHead marker="02 //" title="Screenshots" />
+        <div class="gallery">
+          {gallery.map((s) => (
+            <figure class="shot reveal">
+              <a class="window" href={s.src} target="_blank" rel="noopener" aria-label={`${s.caption} — open full size`}>
+                <img src={s.src} alt={s.alt} width="1024" height="760" loading="lazy" decoding="async" />
+              </a>
+              <figcaption class="mono">{s.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+        <p class="note">Space Map is shown with an example home folder.</p>
+      </div>
+    </section>
+
+    <!-- ───────────── safety ───────────── -->
+    <section class="section" id="safety">
+      <div class="shell">
+        <SectionHead marker="03 //" title="Careful by design" />
+        <p class="lead">
+          A cleaner earns trust by what it refuses to do. These rules are enforced in code, and the ones that
+          matter most — what can be uninstalled and what runs as root — are checked twice: once in the app and
+          again in the root helper.
+        </p>
+        <ol class="safety">
+          {app.safety.map((s, i) => (
+            <li class="reveal" style={`--i:${i % 3}`}>
+              <span class="check mono" aria-hidden="true">✓</span>
+              <div>
+                <h3>{s.title}</h3>
+                <p>{s.detail}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <!-- ───────────── under the hood ───────────── -->
+    <section class="section" id="hood">
+      <div class="shell">
+        <SectionHead marker="04 //" title="Under the hood" />
+
+        <div class="flow mono reveal" aria-label="How Spruce asks for admin rights">
+          <div class="node">
+            <span class="who">you</span>
+            <span>Spruce</span>
+            <small>runs as your user</small>
+          </div>
+          <span class="arrow" aria-hidden="true">→</span>
+          <div class="node">
+            <span class="who">polkit</span>
+            <span>password prompt</span>
+            <small>app.spruce.Spruce.helper</small>
+          </div>
+          <span class="arrow" aria-hidden="true">→</span>
+          <div class="node accent">
+            <span class="who">root</span>
+            <span>spruce-helper</span>
+            <small>fixed actions only</small>
+          </div>
+        </div>
+
+        <div class="stack">
+          {app.stack.map((s) => (
+            <article class="reveal">
+              <h3>{s.title}</h3>
+              <p>{s.detail}</p>
+            </article>
+          ))}
+        </div>
+
+        <ul class="tech mono" aria-label="Technology">
+          {app.tech.map((t) => <li>{t}</li>)}
+        </ul>
+      </div>
+    </section>
+
+    <!-- ───────────── how it was built ───────────── -->
+    <section class="section" id="built">
+      <div class="shell">
+        <SectionHead marker="05 //" title="How it was built" />
+        <ol class="timeline">
+          {app.milestones.map((m) => (
+            <li class="reveal">
+              <span class="m-label mono">{m.label}</span>
+              <h3>{m.title}</h3>
+              <p>{m.detail}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <!-- ───────────── get it ───────────── -->
+    <section class="section" id="get">
+      <div class="shell">
+        <SectionHead marker="06 //" title="Get Spruce" />
+        <div class="get reveal">
+          <div>
+            <p class="lead">
+              Spruce runs on {app.platform}, and installs as a single .deb. The source isn’t public yet — if you’d
+              like to try it or look at the code, get in touch.
+            </p>
+            <dl class="facts mono">
+              <div><dt>version</dt><dd>{app.version}</dd></div>
+              <div><dt>licence</dt><dd>{app.license}</dd></div>
+              <div><dt>needs</dt><dd>Python 3.11+, GTK 4, libadwaita 1.6+</dd></div>
+            </dl>
+          </div>
+          <div class="get-cta">
+            <a class="btn primary" href={sourceMail}>Ask for the source <Icon name="mail" size={15} /></a>
+            <a class="btn" href="/#work"><span class="back" aria-hidden="true">←</span> All work</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <PageScripts />
+</Base>
+
+<style>
+  /* ---------- hero ---------- */
+
+  .hero {
+    position: relative;
+    padding-block: clamp(2rem, 6vw, 4rem) clamp(3rem, 7vw, 4.5rem);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: -20% 0 auto;
+    height: 60%;
+    background: radial-gradient(60% 100% at 30% 0%, var(--accent-glow), transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .crumbs {
+    display: flex;
+    gap: 0.45rem;
+    font-size: 0.8rem;
+    color: var(--text-faint);
+    margin-bottom: 1.75rem;
+  }
+
+  .crumbs a { color: var(--accent); }
+  .crumbs a:hover { text-decoration: underline; }
+
+  .intro {
+    display: flex;
+    align-items: center;
+    gap: clamp(1rem, 3vw, 1.5rem);
+  }
+
+  .app-icon {
+    width: clamp(64px, 12vw, 96px);
+    height: auto;
+    filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.35));
+  }
+
+  h1 {
+    font-size: clamp(2.4rem, 7vw, 3.6rem);
+    letter-spacing: -0.04em;
+  }
+
+  .tagline {
+    margin-top: 0.3rem;
+    font-size: clamp(1.05rem, 2.4vw, 1.3rem);
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .summary {
+    margin-top: 1.6rem;
+    max-width: var(--measure);
+    font-size: 1.05rem;
+    color: var(--text-dim);
+  }
+
+  .badges, .tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .badges { margin-top: 1.4rem; }
+
+  .badges li, .tech li {
+    padding: 0.22rem 0.6rem;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    background: var(--surface);
+    font-size: 0.74rem;
+    color: var(--text-dim);
+  }
+
+  .cta, .get-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-top: 1.75rem;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.62rem 1.1rem;
+    border: 1px solid var(--border-hi);
+    border-radius: var(--radius);
+    background: var(--surface);
+    font-family: var(--mono);
+    font-size: 0.84rem;
+    font-weight: 500;
+    transition: border-color 0.18s, background-color 0.18s, color 0.18s, translate 0.18s;
+  }
+
+  .btn:hover { translate: 0 -2px; border-color: var(--accent); color: var(--accent); }
+
+  .btn.primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--bg);
+    font-weight: 600;
+  }
+
+  .btn.primary:hover { background: var(--accent-dim); border-color: var(--accent-dim); color: var(--bg); }
+
+  /* a screenshot in a quiet frame */
+  .window {
+    display: block;
+    border: 1px solid var(--border-hi);
+    border-radius: 12px;
+    overflow: hidden;
+    background: #1e1e1e;
+    box-shadow: var(--shadow);
+  }
+
+  .window img { width: 100%; height: auto; }
+
+  .hero-shot { margin-top: clamp(2.5rem, 6vw, 3.5rem); }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1px;
+    margin-top: clamp(2rem, 5vw, 3rem);
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .stats li {
+    display: grid;
+    gap: 0.25rem;
+    padding: 1.2rem 1.4rem;
+    background: var(--surface);
+  }
+
+  .stat-v { font-size: 1.6rem; font-weight: 600; color: var(--accent); letter-spacing: -0.02em; }
+  .stat-l { font-size: 0.82rem; color: var(--text-dim); }
+
+  /* ---------- features ---------- */
+
+  /* Two columns: ten features fill five even rows (three would leave one orphan). */
+  .features {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  @media (max-width: 700px) {
+    .features { grid-template-columns: 1fr; }
+  }
+
+  html.js .feature, html.js .safety li { transition-delay: calc(var(--i) * 60ms); }
+
+  .feature {
+    position: relative;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    padding: 1.4rem 1.5rem;
+    transition: border-color 0.22s, background-color 0.22s;
+  }
+
+  .feature:hover { border-color: var(--border-hi); background: var(--surface-hi); }
+
+  .idx { font-size: 0.74rem; color: var(--accent); }
+
+  .feature h3 { margin-top: 0.35rem; font-size: 1.08rem; }
+
+  .f-sum { margin-top: 0.45rem; color: var(--text); font-size: 0.93rem; }
+
+  .points {
+    margin-top: 0.9rem;
+    display: grid;
+    gap: 0.45rem;
+  }
+
+  .points li {
+    position: relative;
+    padding-left: 1.1rem;
+    font-size: 0.88rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  .points li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-family: var(--mono);
+  }
+
+  /* ---------- gallery ---------- */
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: clamp(1rem, 3vw, 1.75rem);
+  }
+
+  .shot .window { transition: translate 0.22s, border-color 0.22s; }
+  .shot .window:hover { translate: 0 -3px; border-color: var(--accent); }
+
+  figcaption {
+    margin-top: 0.65rem;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+  }
+
+  .note {
+    margin-top: 1.5rem;
+    font-size: 0.8rem;
+    color: var(--text-faint);
+  }
+
+  /* ---------- safety ---------- */
+
+  .lead {
+    max-width: var(--measure);
+    color: var(--text-dim);
+    margin-bottom: 2rem;
+  }
+
+  .safety {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.25rem 2rem;
+  }
+
+  .safety li { display: flex; gap: 0.9rem; }
+
+  .check {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 1.8rem;
+    height: 1.8rem;
+    border-radius: 50%;
+    background: var(--accent-glow);
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .safety h3, .stack h3, .timeline h3 { font-size: 1rem; }
+  .safety p, .stack p, .timeline p { margin-top: 0.3rem; font-size: 0.9rem; color: var(--text-dim); }
+
+  /* ---------- under the hood ---------- */
+
+  .flow {
+    display: flex;
+    align-items: stretch;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .node {
+    flex: 1 1 180px;
+    display: grid;
+    gap: 0.15rem;
+    padding: 1rem 1.1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    font-size: 0.9rem;
+  }
+
+  .node.accent { border-color: var(--accent); }
+  .who { font-size: 0.7rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; }
+  .node small { color: var(--text-faint); font-size: 0.74rem; }
+
+  .arrow { align-self: center; color: var(--text-faint); font-size: 1.2rem; }
+
+  .stack {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem 2rem;
+  }
+
+  .stack article { border-left: 2px solid var(--border-hi); padding-left: 1rem; }
+
+  .tech { margin-top: 2.25rem; }
+
+  /* ---------- timeline ---------- */
+
+  .timeline {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .timeline li { padding: 1.2rem 1.3rem; background: var(--surface); }
+  .m-label { font-size: 0.72rem; color: var(--accent); }
+  .timeline h3 { margin-top: 0.3rem; }
+
+  /* ---------- get it ---------- */
+
+  .get {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) auto;
+    gap: 2rem;
+    align-items: center;
+    padding: clamp(1.4rem, 4vw, 2rem);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+
+  .get .lead { margin-bottom: 1.25rem; }
+  .get-cta { margin-top: 0; justify-content: flex-end; }
+
+  .facts { display: grid; gap: 0.35rem; font-size: 0.82rem; }
+  .facts div { display: flex; gap: 0.75rem; }
+  .facts dt { color: var(--text-faint); min-width: 4.5rem; }
+  .facts dd { margin: 0; color: var(--text-dim); }
+
+  .back { font-family: var(--mono); }
+
+  @media (max-width: 760px) {
+    .get { grid-template-columns: 1fr; }
+    .get-cta { justify-content: flex-start; }
+    .arrow { display: none; }
+  }
+</style>

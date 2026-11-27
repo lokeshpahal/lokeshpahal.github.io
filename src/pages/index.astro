@@ -7,6 +7,7 @@ import Experience from '../components/Experience.astro';
 import Skills from '../components/Skills.astro';
 import Projects from '../components/Projects.astro';
 import Contact from '../components/Contact.astro';
+import PageScripts from '../components/PageScripts.astro';
 import { profile, socials, experience } from '../data/profile';
 import { isVisible } from '../data/sections';
 
@@ -38,33 +39,9 @@ const jsonLd = {
 
   <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
+  <PageScripts />
+
   <script>
-    // Theme toggle — the initial value is set inline in <head> to avoid a flash.
-    const toggle = document.getElementById('theme-toggle');
-    toggle?.addEventListener('click', () => {
-      const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-      document.documentElement.dataset.theme = next;
-      try { localStorage.setItem('theme', next); } catch {}
-    });
-
-    // Reveal sections as they enter the viewport.
-    const revealables = document.querySelectorAll<HTMLElement>('.reveal');
-    if ('IntersectionObserver' in window) {
-      const io = new IntersectionObserver(
-        (entries) => {
-          for (const entry of entries) {
-            if (!entry.isIntersecting) continue;
-            entry.target.classList.add('in');
-            io.unobserve(entry.target);
-          }
-        },
-        { rootMargin: '0px 0px -12% 0px', threshold: 0.05 },
-      );
-      revealables.forEach((el) => io.observe(el));
-    } else {
-      revealables.forEach((el) => el.classList.add('in'));
-    }
-
     // Highlight the nav link for whichever section is on screen.
     const navLinks = new Map<string, HTMLAnchorElement>();
     document.querySelectorAll<HTMLAnchorElement>('[data-nav]').forEach((a) => {
@@ -93,11 +70,5 @@ const jsonLd = {
       );
       sections.forEach((s) => spy.observe(s));
     }
-
-    // Give the sticky header a border once the page has scrolled.
-    const bar = document.querySelector('.bar');
-    const onScroll = () => bar?.classList.toggle('stuck', window.scrollY > 8);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
   </script>
 </Base>

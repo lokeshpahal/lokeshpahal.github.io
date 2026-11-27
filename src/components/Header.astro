@@ -3,12 +3,17 @@ import Icon from './Icon.astro';
 import { profile } from '../data/profile';
 import { sections } from '../data/sections';
 
+// On the home page links stay in-page (`#work`); other pages pass base="/" so
+// the same links lead back to the home page's sections (`/#work`).
+interface Props { base?: string; }
+const { base = '' } = Astro.props;
+
 // Nav mirrors whichever sections actually render.
-const nav = sections.map((s) => ({ href: `#${s.id}`, label: s.label }));
+const nav = sections.map((s) => ({ href: `${base}#${s.id}`, label: s.label }));
 ---
 <header class="bar">
   <div class="shell inner">
-    <a class="brand mono" href="#top">
+    <a class="brand mono" href={`${base}#top`}>
       <span class="prompt">~/</span><span>{profile.name.split(' ')[0].toLowerCase()}</span><span class="caret" aria-hidden="true"></span>
     </a>
 

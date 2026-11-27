@@ -2,10 +2,11 @@
 import '../styles/global.css';
 import { profile } from '../data/profile';
 
-interface Props { title?: string; description?: string; }
+interface Props { title?: string; description?: string; image?: string; }
 const {
   title = `${profile.name} — ${profile.role}`,
   description = profile.metaDescription,
+  image,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
@@ -24,8 +25,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={new URL(profile.avatar, Astro.site).href} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={new URL(image ?? profile.avatar, Astro.site).href} />
+    {/* A wide page image (e.g. an app screenshot) gets the large card; the avatar keeps the small one. */}
+    <meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
 
     <meta name="google-site-verification" content="Tmws0BGD1V6NQ4vtspaINuUpDWjJXkWFHLy1z9KUvy0" />
     <meta name="theme-color" content="#08090c" media="(prefers-color-scheme: dark)" />

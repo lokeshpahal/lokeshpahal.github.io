@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="tile" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3fb77a"/>
+      <stop offset="1" stop-color="#1f7a4f"/>
+    </linearGradient>
+    <linearGradient id="shade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#e3f5ea"/>
+    </linearGradient>
+  </defs>
+  <!-- tile -->
+  <rect x="8" y="12" width="112" height="108" rx="24" fill="#175c3b"/>
+  <rect x="8" y="8" width="112" height="108" rx="24" fill="url(#tile)"/>
+  <!-- spruce tree: three tiers and a trunk -->
+  <path d="M64 22 L84 50 H74 L92 74 H80 L98 98 H30 L48 74 H36 L54 50 H44 Z" fill="url(#shade)"/>
+  <rect x="58" y="98" width="12" height="10" rx="2" fill="#e3f5ea"/>
+  <!-- sparkle: "clean" -->
+  <path d="M96 24 L99 32 L107 35 L99 38 L96 46 L93 38 L85 35 L93 32 Z" fill="#fff6c2"/>
+</svg>
