@@ -8,7 +8,6 @@ import { profile } from '../../data/profile';
 import { spruce as app } from '../../data/apps';
 
 const [hero, ...gallery] = app.shots;
-const sourceMail = `mailto:${profile.email}?subject=${encodeURIComponent(`${app.name} — source request`)}`;
 const mailTo = (subject: string) => `mailto:${profile.email}?subject=${encodeURIComponent(subject)}`;
 
 const jsonLd = {
@@ -19,6 +18,7 @@ const jsonLd = {
   applicationCategory: 'UtilitiesApplication',
   operatingSystem: app.platform,
   softwareVersion: app.version,
+  downloadUrl: app.download,
   license: `https://spdx.org/licenses/${app.license}.html`,
   offers: [
     { '@type': 'Offer', name: 'Spruce', price: '0', priceCurrency: 'USD' },
@@ -54,10 +54,10 @@ const jsonLd = {
         </ul>
 
         <div class="cta">
-          <a class="btn primary" href="#features">See the features <Icon name="arrow" size={16} /></a>
-          <a class="btn" href="#screens">Screenshots</a>
+          <a class="btn primary" href={app.download}>Download free <Icon name="arrow" size={16} /></a>
+          <a class="btn" href="#features">Features</a>
           <a class="btn" href="#pricing">Pricing</a>
-          <a class="btn" href={sourceMail}>Ask for the source</a>
+          <a class="btn" href={app.repo} target="_blank" rel="noopener"><Icon name="github" size={15} /> Source</a>
         </div>
 
         <figure class="window hero-shot reveal">
@@ -208,7 +208,7 @@ const jsonLd = {
               <ul class="points">
                 {plan.points.map((pt) => <li>{pt}</li>)}
               </ul>
-              <a class:list={['btn', { primary: plan.highlight }]} href={mailTo(plan.ctaSubject)}>{plan.cta}</a>
+              <a class:list={['btn', { primary: plan.highlight }]} href={plan.href ?? mailTo(plan.ctaSubject)}>{plan.cta}</a>
             </article>
           ))}
         </div>
@@ -230,9 +230,9 @@ const jsonLd = {
         <div class="get reveal">
           <div>
             <p class="lead">
-              Spruce runs on {app.platform}, and installs as a single .deb. The app is free; Spruce Pro is a
-              $24 add-on with a 14-day trial inside the app. The source isn’t public yet — if you’d like to look at
-              the code, get in touch.
+              Spruce runs on {app.platform}, and installs as a single .deb:
+              <code>sudo apt install ./spruce_{app.version}_all.deb</code>. The app is free and its source is on
+              GitHub; Spruce Pro is a $24 add-on with a 14-day trial inside the app.
             </p>
             <dl class="facts mono">
               <div><dt>version</dt><dd>{app.version}</dd></div>
@@ -242,8 +242,9 @@ const jsonLd = {
             </dl>
           </div>
           <div class="get-cta">
-            <a class="btn primary" href={mailTo('Buy Spruce Pro')}>Buy Spruce Pro <Icon name="mail" size={15} /></a>
-            <a class="btn" href={sourceMail}>Ask for the source</a>
+            <a class="btn primary" href={app.download}>Download free (.deb)</a>
+            <a class="btn" href={mailTo('Buy Spruce Pro')}>Buy Spruce Pro <Icon name="mail" size={15} /></a>
+            <a class="btn" href={app.repo} target="_blank" rel="noopener"><Icon name="github" size={15} /> Source</a>
             <a class="btn" href="/#work"><span class="back" aria-hidden="true">←</span> All work</a>
           </div>
         </div>
@@ -650,6 +651,16 @@ const jsonLd = {
   .facts dd { margin: 0; color: var(--text-dim); }
 
   .back { font-family: var(--mono); }
+
+  .get code {
+    font-family: var(--mono);
+    font-size: 0.85em;
+    padding: 0.1rem 0.35rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--bg);
+    white-space: nowrap;
+  }
 
   @media (max-width: 760px) {
     .get { grid-template-columns: 1fr; }

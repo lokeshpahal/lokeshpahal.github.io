@@ -5,7 +5,8 @@
 
 /** `tier`: 'pro' = Spruce Pro; 'part' = some of it is Pro (those points say so). */
 export type Feature = { name: string; summary: string; points: string[]; tier?: 'pro' | 'part' };
-export type Plan = { name: string; price: string; per: string; note: string; points: string[]; cta: string; ctaSubject: string; highlight?: boolean };
+/** A plan's button goes to `href` if set, otherwise opens an email with `ctaSubject`. */
+export type Plan = { name: string; price: string; per: string; note: string; points: string[]; cta: string; ctaSubject: string; href?: string; highlight?: boolean };
 export type Shot = { src: string; alt: string; caption: string };
 export type Milestone = { label: string; title: string; detail: string };
 
@@ -16,7 +17,9 @@ export const spruce = {
   tagline: 'Keep Ubuntu clean, fast and safe.',
   summary:
     'A native desktop app that finds and removes junk, shows exactly what fills your drive, uninstalls apps without leaving a trace, keeps every kind of software up to date, and checks your security settings — all from one window, and all without ever deleting something you did not confirm.',
-  version: '0.4.0',
+  version: '0.5.0',
+  download: 'https://github.com/PahalSoft/spruce/releases/download/v0.5.0/spruce_0.5.0_all.deb',
+  repo: 'https://github.com/PahalSoft/spruce',
   year: '2026',
   license: 'GPL-3.0-or-later',
   platform: 'Ubuntu 24.04 or newer with GNOME',
@@ -172,8 +175,9 @@ export const spruce = {
         per: '',
         note: 'Free software, GPL-3.0',
         points: ['Smart Scan and Cleanup', 'Space Map of any folder', 'Large & old files', 'Complete uninstaller and leftovers', 'Every update in one place', 'Security checks and virus scanning'],
-        cta: 'Ask for a copy',
+        cta: 'Download free (.deb)',
         ctaSubject: 'Spruce',
+        href: 'https://github.com/PahalSoft/spruce/releases/download/v0.5.0/spruce_0.5.0_all.deb',
       },
       {
         name: 'Spruce Pro',
