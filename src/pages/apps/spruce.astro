@@ -215,15 +215,16 @@ const jsonLd = {
         <div class="get reveal">
           <div>
             <p class="lead">
-              Spruce runs on {app.platform}, and installs as a single .deb:
-              <code>sudo apt install ./spruce_{app.version}_all.deb</code>. Every feature is free, and the source is
-              on GitHub.
+              Spruce runs on {app.platform}. Install it from its PPA so it updates with the rest of
+              Ubuntu (24.04 LTS and 26.04 LTS): <code>sudo add-apt-repository ppa:pahalsoft/spruce</code>, then
+              <code>sudo apt install spruce</code>. Or install the .deb on any Ubuntu 24.04 or newer:
+              <code>sudo apt install ./spruce_all.deb</code>. Every feature is free, and the source is on GitHub.
             </p>
             <dl class="facts mono">
               <div><dt>version</dt><dd>{app.version}</dd></div>
               <div><dt>licence</dt><dd>{app.license}</dd></div>
               <div><dt>price</dt><dd>free · coffee optional</dd></div>
-              <div><dt>needs</dt><dd>Python 3.11+, GTK 4, libadwaita 1.6+</dd></div>
+              <div><dt>needs</dt><dd>Python 3.11+, GTK 4.12+, libadwaita 1.5+</dd></div>
             </dl>
           </div>
           <div class="get-cta">
