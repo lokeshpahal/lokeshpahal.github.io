@@ -14,7 +14,7 @@ export const spruce = {
   tagline: 'Keep Ubuntu clean, fast and safe.',
   summary:
     'A native desktop app that finds and removes junk, shows exactly what fills your drive, uninstalls apps without leaving a trace, keeps every kind of software up to date, and checks your security settings — all from one window, and all without ever deleting something you did not confirm.',
-  version: '0.7.1',
+  version: '0.8.0',
   download: 'https://github.com/PahalSoft/spruce/releases/latest/download/spruce_all.deb',
   repo: 'https://github.com/PahalSoft/spruce',
   year: '2026',
@@ -54,9 +54,11 @@ export const spruce = {
     },
     {
       name: 'Space Map',
-      summary: 'A clickable treemap of any folder or the whole drive.',
+      summary: 'See what fills any folder or the whole drive, and clear it out.',
       points: [
-        'Big folders are big tiles; click a tile to look inside',
+        'The biggest items as bubbles; click a folder to look inside, then go back and forward',
+        'Tick what you do not need and review it before it goes to the Trash',
+        'Standard folders, app settings and keys are protected',
         'Home folder, whole drive, or any folder you choose',
         'Stays on one drive and groups small files, so even huge folders stay readable',
       ],
@@ -138,7 +140,7 @@ export const spruce = {
   shots: [
     { src: '/apps/spruce/smart-scan.webp', alt: 'Spruce Smart Scan showing 12.3 GB that can be freed, 89 updates and 3 security issues', caption: 'Smart Scan — one button, one summary' },
     { src: '/apps/spruce/cleanup.webp', alt: 'Spruce Cleanup list with sizes and explanations for each item', caption: 'Cleanup — every item explained' },
-    { src: '/apps/spruce/space-map.webp', alt: 'Spruce Space Map treemap of an example home folder', caption: 'Space Map — click a tile to look inside' },
+    { src: '/apps/spruce/space-map.webp', alt: 'Spruce Space Map: an example home folder as bubbles, with a checklist of its biggest items', caption: 'Space Map — tick what you do not need, review, remove' },
     { src: '/apps/spruce/duplicates.webp', alt: 'Spruce Duplicates: sets of identical files, with the copy to keep marked', caption: 'Duplicates — one copy of each is always kept' },
     { src: '/apps/spruce/applications.webp', alt: 'Spruce Applications list with app icons, sizes and Uninstall buttons', caption: 'Applications — apt, Snap and Flatpak together' },
     { src: '/apps/spruce/updates.webp', alt: 'Spruce Updates page listing Ubuntu package and Snap updates', caption: 'Updates — every source in one list' },
@@ -152,7 +154,7 @@ export const spruce = {
     { title: 'polkit, the proper way', detail: 'The admin helper ships root-owned in /usr/libexec with its own polkit action, so the password prompt says exactly what Spruce is asking for.' },
     { title: 'Rules, not code', detail: 'Cleanup targets live in a TOML file: path, explanation, whether it is recommended, which apps must be closed first.' },
     { title: 'Perceptual hashing', detail: 'Similar photos are matched with a 64-bit difference hash, grouped around the best copy so look-alikes never chain together, and cached so re-scans take a second.' },
-    { title: 'A treemap from scratch', detail: 'Space Map uses a squarified treemap drawn with GTK 4 snapshots, with a scanner that stays on one filesystem and groups small files.' },
+    { title: 'Bubbles and tiles from scratch', detail: 'Space Map packs its bubbles and lays out its squarified treemap itself, drawn with GTK 4 snapshots, over a parallel scanner that stays on one filesystem and groups small files.' },
     { title: 'Desktop integration', detail: 'A systemd user timer for the weekly check, a GNOME Shell extension for the top bar, AppStream metadata for the App Center, and a single .deb for all of it.' },
   ],
 
