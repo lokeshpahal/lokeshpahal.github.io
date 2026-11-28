@@ -20,7 +20,7 @@ export const spruce = {
   year: '2026',
   license: 'GPL-3.0-or-later',
   platform: 'Ubuntu 24.04 or newer with GNOME',
-  badges: ['Ubuntu 24.04+', 'GTK 4 · libadwaita', 'Python', 'Free & open source', 'PPA · .deb'],
+  badges: ['Ubuntu 24.04+', 'GTK 4 · libadwaita', 'Python', 'Free & open source', 'PPA · .deb · Flatpak'],
   metaDescription:
     'Spruce — a native Ubuntu app by Lokesh Pahal that cleans junk, maps disk usage, finds duplicates and similar photos, uninstalls apps completely, unifies updates, checks security and scans for viruses. Free and open source.',
 
